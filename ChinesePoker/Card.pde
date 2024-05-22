@@ -21,7 +21,7 @@ public class Card{
     return suit;  
   }
   
-  public string cardimage(){
+  public String cardimage(){
     return "" + strength + suit + ".png";
   } 
   
