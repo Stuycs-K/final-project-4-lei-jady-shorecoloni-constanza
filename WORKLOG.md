@@ -1,22 +1,22 @@
 # Work Log
 
-## GROUP MEMBER 1
+## Constanza Shore Coloni
 
-### date x
+### May 22, 2024
 
-info
+tested branches and created Card class
 
-### date y
+### May 23, 2024
 
-info
+created Hand class - wrote constructor/accessors, started on add/remove
 
 
-## GROUP MEMBER 2
+## Jady Lei
 
-### date x
+### May 22, 2024
 
-info
+took APUSH!!
 
-### date y
+### May 23, 2024
 
-info
+worked on writing Hand class methods
