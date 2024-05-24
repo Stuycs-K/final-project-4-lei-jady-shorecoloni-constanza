@@ -8,8 +8,7 @@ tested branches and created Card class
 
 ### May 23, 2024
 
-created Hand class - wrote constructor/accessors, started on add/remove
-created and added all of the card faces from Playing Cards on Demand.
+created Hand class - wrote constructor/accessors, started on add/removeCards and tested Hand methods
 
 
 ## Jady Lei
@@ -20,4 +19,5 @@ took APUSH!!
 
 ### May 23, 2024
 
-worked on writing Hand class methods
+worked on writing Hand class add/remove methods and added all of the card faces from Playing Cards on Demand.
+
