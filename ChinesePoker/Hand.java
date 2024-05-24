@@ -76,16 +76,20 @@ public class Hand{
 	private boolean isPossibleSet(Hand set) {
 		// assumes set given is of valid lengths 1, 2, 5
 		// doubles
+		boolean single, pair, straight, flush, house;
 		if (set.size() = 1) {
-			return true;
+			single == true;
 		}
 		if (set.size() == 2 && set.get(0).getStrength() == set.get(1).getStrength) {
-			return true;
+			pair == true;
 		}
 		// straights
 		set.sort();
-		if (set.get()) {
-			// 
+		if (set.size == 5 && (set.get(4).getStrength() - set.get(3).getStrength()) && 
+							(set.get(3).getStrength() - set.get(2).getStrength()) && 
+							(set.get(2).getStrength() - set.get(1).getStrength()) && 
+							(set.get(1).getStrength() - set.get(0).getStrength()) ) {
+			flush = true;
 		}
 	}
 
