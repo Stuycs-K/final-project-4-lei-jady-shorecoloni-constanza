@@ -9,6 +9,7 @@ tested branches and created Card class
 ### May 23, 2024
 
 created Hand class - wrote constructor/accessors, started on add/remove
+created and added all of the card faces from Playing Cards on Demand.
 
 
 ## Jady Lei
