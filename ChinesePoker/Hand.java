@@ -8,6 +8,10 @@ public class Hand{
     hand = new ArrayList<Card>();
   }
 
+  public int size() {
+	return hand.size();
+  }
+
   private boolean addCard(Card card){
     return hand.add(card);
   }
@@ -68,5 +72,32 @@ public class Hand{
 		System.out.println(test.toString());
 		
 	}
+
+	private boolean isPossibleSet(Hand set) {
+		// assumes set given is of valid lengths 1, 2, 5
+		// doubles
+		if (set.size() = 1) {
+			return true;
+		}
+		if (set.size() == 2 && set.get(0).getStrength() == set.get(1).getStrength) {
+			return true;
+		}
+		// straights
+		set.sort();
+		if (set.get()) {
+			// 
+		}
+	}
+
+	public ArrayList<Hand> possibleSets(ArrayList<Hand> sets, int size, Hand partial, Hand cardsRemaining){
+		if (size == 0) {
+			sets.add(partial);
+		} else {
+			for (Card card : cardsRemaining) {
+				possibleSets()
+			}
+		}
+		return sets;
+	}	
 
 }
