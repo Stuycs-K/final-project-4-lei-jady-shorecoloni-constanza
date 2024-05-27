@@ -3,7 +3,7 @@ import java.util.*;
 public class Player{
   String name;
   Hand deck;
-  Hand selectedHHand;
+  Hand selectedHand;
 
   public Player(String name, Hand deck){
     this.name = name;
