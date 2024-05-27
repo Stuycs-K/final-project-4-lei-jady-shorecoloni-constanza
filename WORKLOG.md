@@ -10,6 +10,13 @@ tested branches and created Card class
 
 created Hand class - wrote constructor/accessors, started on add/removeCards and tested Hand methods
 
+### May 24, 2024
+
+Created Player and Game classes
+
+### May 27, 2024
+
+continued working on Game class. Added helper method to create deck of cards for constructor, wrote shuffleDeck(), and tested them
 
 ## Jady Lei
 
