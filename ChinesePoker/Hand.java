@@ -7,7 +7,11 @@ public class Hand{
   public Hand(){
     hand = new ArrayList<Card>();
   }
-
+	
+	public int size(){
+		return hand.size();
+	}
+	
   private boolean addCard(Card card){
     return hand.add(card);
   }
@@ -21,7 +25,7 @@ public class Hand{
   public Card getCard(int index){
     return hand.get(index);
   }
-  private Card removeCard(int index){
+  public Card removeCard(int index){
     return hand.remove(index);
   }
   public ArrayList<Card> removeCards(ArrayList<Integer> indexes){

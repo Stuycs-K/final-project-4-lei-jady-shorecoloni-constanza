@@ -2,7 +2,7 @@ import java.util.*;
 
 public class Game{
   ArrayList<Player> players;
-  Hand deck;
+  public Hand deck;
 
   public Game(ArrayList<Player> players){
     this.players = players;
@@ -44,10 +44,29 @@ public class Game{
 		return cards;
 	}
 	
-	public static void main(String[] args){
-		ArrayList<Card> test = createDeck();
-		for(int i = 0; i < test.size(); i++){
-			System.out.println(test.get(i).getName() + ", " + test.get(i).getStrength());
+	private void shuffleDeck(){
+		ArrayList<Card> shuffled = new ArrayList<Card>();
+		for(int i = 52; i >0; i--){
+			int index = (int)(Math.random()*i);
+			shuffled.add(deck.removeCard(index));
 		}
+	//	System.out.println(deck.size() == 0);
+		deck.addCards(shuffled);
+	//	System.out.println(deck.size());
+	}
+	
+	private String toString(){
+		String result = "";
+		for(int i = 0; i < 52; i++){
+			result += (deck.getCard(i).getName()) + "\n";
+		}
+		return result;
+	}
+	public static void main(String[] args){
+		ArrayList<Player> people = new ArrayList<Player>();
+		Game test = new Game(people);
+		test.shuffleDeck();
+		System.out.println(test.toString());
+
 	}
 }
