@@ -138,10 +138,14 @@ public class Hand{
 		return sets;
 	}
   public ArrayList<Hand> possibleSets(ArrayList<Card> cardsRemaining){
-		ArrayList<Hand> singles = possibleSets(new ArrayList<Hand>(), 1, new ArrayList<Card>(), cardsRemaining);
-    ArrayList<Hand> doubles = possibleSets(new ArrayList<Hand>(), 2, new ArrayList<Card>(), cardsRemaining);
-    ArrayList<Hand> sets = possibleSets(new ArrayList<Hand>(), 5, new ArrayList<Card>(), cardsRemaining);
     ArrayList<Hand> all = new ArrayList<Hand>();
+		ArrayList<Hand> singles = possibleSets(new ArrayList<Hand>(), 1, new ArrayList<Card>(), cardsRemaining);
+    if (cardsRemaining.size() > 2) {
+      ArrayList<Hand> doubles = possibleSets(new ArrayList<Hand>(), 2, new ArrayList<Card>(), cardsRemaining);
+    }
+    if (cardsRemaining.size > 5) {
+      ArrayList<Hand> sets = possibleSets(new ArrayList<Hand>(), 5, new ArrayList<Card>(), cardsRemaining); 
+    }
     for (Hand h : singles) {
       all.add(h);
     }
