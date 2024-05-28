@@ -118,15 +118,17 @@ public class Hand{
         return (single || pair || straight || flush || house || four);
 	}
 
-	public ArrayList<Hand> possibleSets(ArrayList<Hand> sets, int size, ArrayList partial, Hand cardsRemaining){
+	public ArrayList<Hand> possibleSets(ArrayList<Hand> sets, int size, ArrayList<Card> partial, ArrayList<Card> cardsRemaining){
 		if (size == 0) {
                 if (isPossibleSet(hand)) {
-
+                    sets.add(new Hand(partial));
                 }
-			    sets.add(new Hand(partial));
 		} else {
-			for (Card card : cardsRemaining.getHand()) {
-				// possibleSets()
+			for (Card card : cardsRemaining) {
+                partial.add(card);
+                cardsRemaining.remove(card);
+				possibleSets(sets, size-1, partial, cardsRemaining);
+                cardsRemaining.add(card);
 			}
 		}
 		return sets;
