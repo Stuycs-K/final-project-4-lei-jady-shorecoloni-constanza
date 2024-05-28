@@ -134,6 +134,14 @@ public class Hand{
 		return sets;
 	}
 
+  public int deckStrength(){
+    int thisStrength = 0;
+    for(Card card: this.hand){
+      thisStrength += card.getStrength();
+    }
+    return thisStrength;
+  }
+
   public Hand compareStrength(Hand other){
     int thisStrength = 0;
     for(Card card: this.hand){
