@@ -134,4 +134,18 @@ public class Hand{
 		return sets;
 	}
 
+  public Hand compareStrength(Hand other){
+    int thisStrength = 0;
+    for(Card card: this.hand){
+      thisStrength += card.getStrength();
+    }
+    int otherStrength = 0;
+    for(Card card: other.hand){
+      otherStrength += card.strength();
+    }
+    if(thisStrength > otherStrength)
+      return this;
+    return other;
+  }
+//diamond clover heart spades
 }
