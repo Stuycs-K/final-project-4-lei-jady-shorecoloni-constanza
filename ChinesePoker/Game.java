@@ -8,9 +8,9 @@ public class Game{
     this.players = players;
     deck = new Hand();
 		deck.addCards(createDeck());
-		
+
   }
-	
+
 	private static ArrayList<Card> createDeck(){
 		ArrayList<Card> cards = new ArrayList<Card>(52);
 		String suit = "clover";
@@ -43,7 +43,7 @@ public class Game{
 		}
 		return cards;
 	}
-	
+
 	private void shuffleDeck(){
 		ArrayList<Card> shuffled = new ArrayList<Card>();
 		for(int i = 52; i >0; i--){
@@ -54,19 +54,19 @@ public class Game{
 		deck.addCards(shuffled);
 	//	System.out.println(deck.size());
 	}
-	
-	private String toString(){
+
+	public String toString(){
 		String result = "";
 		for(int i = 0; i < 52; i++){
 			result += (deck.getCard(i).getName()) + "\n";
 		}
 		return result;
 	}
-	public static void main(String[] args){
+/*	public static void main(String[] args){
 		ArrayList<Player> people = new ArrayList<Player>();
 		Game test = new Game(people);
 		test.shuffleDeck();
 		System.out.println(test.toString());
-
 	}
+  */
 }
