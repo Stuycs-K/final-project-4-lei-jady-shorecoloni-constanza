@@ -3,7 +3,7 @@ public class Card implements Comparable<Card>{
   private int strength;
   private String suit;
   
-  Card(String name, int strength, String suit){
+  public Card(String name, int strength, String suit){
     this.name = name;
     this.strength = strength;
     this.suit = suit;
