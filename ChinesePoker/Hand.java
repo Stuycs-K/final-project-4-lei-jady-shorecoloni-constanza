@@ -7,6 +7,9 @@ public class Hand{
   public Hand(){
     hand = new ArrayList<Card>();
   }
+  public Hand(ArrayList<Card> hand){
+    this.hand = hand;
+  }
 
   public int size() {
 	return hand.size();
@@ -24,6 +27,9 @@ public class Hand{
   }
   public Card getCard(int index){
     return hand.get(index);
+  }
+  public ArrayList<Card> getHand(){
+    return hand;
   }
   private Card removeCard(int index){
     return hand.remove(index);
@@ -73,32 +79,43 @@ public class Hand{
 		
 	}
 
-	private boolean isPossibleSet(Hand set) {
+	private boolean isPossibleSet(ArrayList<Card> set) {
 		// assumes set given is of valid lengths 1, 2, 5
 		// doubles
-		boolean single, pair, straight, flush, house;
-		if (set.size() = 1) {
-			single == true;
+		boolean single=false, pair=false, straight=false, flush=false, house=false;
+		if (set.size() == 1) {
+			single = true;
 		}
-		if (set.size() == 2 && set.get(0).getStrength() == set.get(1).getStrength) {
-			pair == true;
+		if (set.size() == 2 && set.get(0).getStrength() == set.get(1).getStrength()) {
+			pair = true;
 		}
 		// straights
-		set.sort();
-		if (set.size == 5 && (set.get(4).getStrength() - set.get(3).getStrength()) && 
-							(set.get(3).getStrength() - set.get(2).getStrength()) && 
-							(set.get(2).getStrength() - set.get(1).getStrength()) && 
-							(set.get(1).getStrength() - set.get(0).getStrength()) ) {
-			flush = true;
+		// set.sort();
+		if ((set.size() == 5) && (set.get(4).getStrength() - set.get(3).getStrength() == 1) && 
+							(set.get(3).getStrength() - set.get(2).getStrength() == 1) && 
+							(set.get(2).getStrength() - set.get(1).getStrength() == 1) && 
+							(set.get(1).getStrength() - set.get(0).getStrength() == 1) ) {
+			straight = true;
 		}
+        if ((set.size() == 5) && (set.get(0).getSuit() == set.get(1).getSuit()) &&
+                                (set.get(1).getSuit() == set.get(2).getSuit()) &&
+                                (set.get(2).getSuit() == set.get(3).getSuit()) &&
+                                (set.get(3).getSuit() == set.get(4).getSuit())) {
+            // 
+        }
+
+        return (single || pair || straight || flush || house);
 	}
 
-	public ArrayList<Hand> possibleSets(ArrayList<Hand> sets, int size, Hand partial, Hand cardsRemaining){
+	public ArrayList<Hand> possibleSets(ArrayList<Hand> sets, int size, ArrayList partial, Hand cardsRemaining){
 		if (size == 0) {
-			sets.add(partial);
+                if (isPossibleSet(hand)) {
+
+                }
+			    sets.add(new Hand(partial));
 		} else {
-			for (Card card : cardsRemaining) {
-				possibleSets()
+			for (Card card : cardsRemaining.getHand()) {
+				// possibleSets()
 			}
 		}
 		return sets;
