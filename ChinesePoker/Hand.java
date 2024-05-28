@@ -120,18 +120,42 @@ public class Hand{
 
 	public ArrayList<Hand> possibleSets(ArrayList<Hand> sets, int size, ArrayList<Card> partial, ArrayList<Card> cardsRemaining){
 		if (size == 0) {
-                if (isPossibleSet(hand)) {
-                    sets.add(new Hand(partial));
-                }
+      if (isPossibleSet(hand)) {
+        sets.add(new Hand(partial));
+      }
 		} else {
 			for (Card card : cardsRemaining) {
-                partial.add(card);
-                cardsRemaining.remove(card);
+        partial.add(cardsRemaining.get(0));
+        cardsRemaining.remove(0);
 				possibleSets(sets, size-1, partial, cardsRemaining);
-                cardsRemaining.add(card);
+        cardsRemaining.add(card);
 			}
 		}
 		return sets;
 	}
+  public ArrayList<Hand> possibleSets(ArrayList<Hand> sets){
+		ArrayList<Hand> singles = possibleSets(new ArrayList<Card>(), 1, new ArrayList<Card>(), sets);
+    ArrayList<Hand> doubles = possibleSets(new ArrayList<Card>(), 2, new ArrayList<Card>(), sets);
+    ArrayList<Hand> sets = possibleSets(new ArrayList<Card>(), 5, new ArrayList<Card>(), sets);
+    ArrayList<Hand> all = new ArrayList<Hand>();
+    for (Hand h : singles) {
+      all.add(h);
+    }
+    for (Hand h : doubles) {
+      all.add(h);
+    }
+    for (Hand h : sets) {
+      all.add(h);
+    }
+    return all;
+	}
+
+  public static void main(String[] args) {
+    Hand test1 = new Hand();
+    test1.add(new Card(1, 1, diamond));
+    test1.add(new Card(1, 2, diamond));
+    test1.add(new Card(1, 2, diamond));
+    System.out.println(possibleSets(test1));
+  }
 
 }
