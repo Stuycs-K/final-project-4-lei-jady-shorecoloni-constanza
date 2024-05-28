@@ -81,30 +81,41 @@ public class Hand{
 
 	private boolean isPossibleSet(ArrayList<Card> set) {
 		// assumes set given is of valid lengths 1, 2, 5
-		// doubles
-		boolean single=false, pair=false, straight=false, flush=false, house=false;
+		// 1
+		boolean single=false, pair=false, straight=false, flush=false, house=false, four=false;
 		if (set.size() == 1) {
 			single = true;
 		}
-		if (set.size() == 2 && set.get(0).getStrength() == set.get(1).getStrength()) {
+        // 2
+		else if (set.size() == 2 && set.get(0).getStrength() == set.get(1).getStrength()) {
 			pair = true;
 		}
-		// straights
-		// set.sort();
-		if ((set.size() == 5) && (set.get(4).getStrength() - set.get(3).getStrength() == 1) && 
-							(set.get(3).getStrength() - set.get(2).getStrength() == 1) && 
-							(set.get(2).getStrength() - set.get(1).getStrength() == 1) && 
-							(set.get(1).getStrength() - set.get(0).getStrength() == 1) ) {
-			straight = true;
-		}
-        if ((set.size() == 5) && (set.get(0).getSuit() == set.get(1).getSuit()) &&
-                                (set.get(1).getSuit() == set.get(2).getSuit()) &&
-                                (set.get(2).getSuit() == set.get(3).getSuit()) &&
-                                (set.get(3).getSuit() == set.get(4).getSuit())) {
-            // 
+		// 5
+        else if (set.size() == 5) {
+            // straights
+            int[] strengths = {set.get(0).getStrength(), set.get(1).getStrength(), set.get(2).getStrength(), set.get(3).getStrength(), set.get(4).getStrength()};
+            Arrays.sort(strengths);
+            if (strengths[4] - strengths[3] == 1 && strengths[3] - strengths[2] == 1 && strengths[2] - strengths[1] == 1 && strengths[1] - strengths[0] == 1) {
+                straight = true;
+            }
+            // flush
+            if ((set.size() == 5) && (set.get(0).getSuit().equals(set.get(1).getSuit())) &&
+                (set.get(1).getSuit().equals(set.get(2).getSuit())) &&
+                (set.get(2).getSuit().equals(set.get(3).getSuit())) &&
+                (set.get(3).getSuit().equals(set.get(4).getSuit()))) {
+                flush = true;
+            }
+            // house
+            if ((strengths[0] == strengths[2] && strengths[3] == strengths[4]) || (strengths[0] == strengths[1] && strengths[2] == strengths[4])) {
+                house = true;
+            }
+            // four
+            if (strengths[0] == strengths[3] || strengths[1] == strengths[4]) {
+                four = true;
+            }
         }
 
-        return (single || pair || straight || flush || house);
+        return (single || pair || straight || flush || house || four);
 	}
 
 	public ArrayList<Hand> possibleSets(ArrayList<Hand> sets, int size, ArrayList partial, Hand cardsRemaining){
