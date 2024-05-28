@@ -1,22 +1,30 @@
 # Work Log
 
-## GROUP MEMBER 1
+## Constanza Shore Coloni
 
-### date x
+### May 22, 2024
 
-info
+tested branches and created Card class
 
-### date y
+### May 23, 2024
 
-info
+created Hand class - wrote constructor/accessors, started on add/removeCards and tested Hand methods
 
+### May 24, 2024
 
-## GROUP MEMBER 2
+Created Player and Game classes
 
-### date x
+### May 27, 2024
 
-info
+continued working on Game class. Added helper method to create deck of cards for constructor, wrote shuffleDeck(), and tested them
 
-### date y
+## Jady Lei
 
-info
+### May 22, 2024
+
+took APUSH!!
+
+### May 23, 2024
+
+worked on writing Hand class add/remove methods and added all of the card faces from Playing Cards on Demand.
+
