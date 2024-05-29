@@ -4,8 +4,8 @@ public class Game{
   ArrayList<Player> players;
   public Hand deck;
 
-  public Game(ArrayList<Player> players){
-    this.players = players;
+  public Game(){
+    this.players = new ArrayList<Player>(4);
     deck = new Hand();
 		deck.addCards(createDeck());
 
@@ -62,6 +62,40 @@ public class Game{
 		}
 		return result;
 	}
+
+  public void start(){
+    shuffleDeck();
+    deal();
+    
+  }
+  
+  public void deal(){
+    ArrayList<Card> cards = new ArrayList<Card>(13);
+    for(int i = 0; i < 13; i++){
+      cards.add(deck.getCard(i));
+    }
+    players.add(new Player("You", new Hand(cards)));
+    
+    cards = new ArrayList<Card>(13);
+    for(int i = 13; i< 26; i++){
+      cards.add(deck.getCard(i));
+    }
+    players.add(new Player("Opponent 1", new Hand(cards)));
+    
+    cards = new ArrayList<Card>(13);
+    for(int i = 26; i< 39; i++){
+      cards.add(deck.getCard(i));
+    }
+    players.add(new Player("Opponent 2", new Hand(cards)));
+    
+    cards = new ArrayList<Card>(13);
+    for(int i = 39; i< 52; i++){
+      cards.add(deck.getCard(i));
+    }
+    players.add(new Player("Opponent 3", new Hand(cards)));
+  }
+
+
 /*	public static void main(String[] args){
 		ArrayList<Player> people = new ArrayList<Player>();
 		Game test = new Game(people);
