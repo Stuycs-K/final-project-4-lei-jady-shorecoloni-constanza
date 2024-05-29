@@ -9,7 +9,8 @@ public class Hand {
 
   public Hand(ArrayList<Card> newHand) {
     hand = new ArrayList<Card>();
-    hand.addAll(newHand.size(), newHand);
+    hand = (ArrayList<Card>) newHand.clone();
+    // hand.addAll(newHand.size(), newHand);
     // this.hand = ArrayList.addAll(hand.size(), hand);
   }
 
@@ -141,13 +142,13 @@ public class Hand {
           // System.out.println("]");
       // end of print testing
 
-      if (isPossibleSet(hand) && hand.size() > 0) {
-                      System.out.print("[");
-                      for (Card c : partial) {
-                        System.out.print(c.getStrength());
-                        System.out.print(", ");
-                      }
-                      System.out.println("]");
+      if (isPossibleSet(partial) && partial.size() > 0) {
+                      // System.out.print("[");
+                      // for (Card c : partial) {
+                      //   System.out.print(c.getStrength());
+                      //   System.out.print(", ");
+                      // }
+                      // System.out.println("]");
 
         sets.add(new Hand(partial));
       }
@@ -168,17 +169,17 @@ public class Hand {
   public ArrayList<Hand> possibleSets(ArrayList<Card> cardsRemaining) {
     ArrayList<Hand> all = new ArrayList<Hand>();
     ArrayList<Hand> singles = possibleSets(new ArrayList<Hand>(), 1, new ArrayList<Card>(), cardsRemaining);
-    System.out.println(singles.toString());
+    // System.out.println(singles.toString());
     for (Hand h : singles) {
       all.add(h);
     }
     if (cardsRemaining.size() >= 2) {
-      // ArrayList<Hand> doubles = possibleSets(new ArrayList<Hand>(), 2, new
-      // ArrayList<Card>(), cardsRemaining);
+      ArrayList<Hand> doubles = possibleSets(new ArrayList<Hand>(), 2, new
+      ArrayList<Card>(), cardsRemaining);
       // System.out.println(doubles.toString());
-      // for (Hand h : doubles) {
-      // all.add(h);
-      // }
+      for (Hand h : doubles) {
+      all.add(h);
+      }
     }
     if (cardsRemaining.size() >= 5) {
       ArrayList<Hand> sets = possibleSets(new ArrayList<Hand>(), 5, new ArrayList<Card>(), cardsRemaining);
@@ -196,7 +197,7 @@ public class Hand {
     test1.addCard(new Card("2", 2, "diamond"));
     test1.addCard(new Card("2", 2, "diamond"));
     ArrayList<Hand> testSets = test1.possibleSets(test1.getHand());
-    // System.out.println(testSets.toString());
+    System.out.println(testSets.toString());
   }
 
 }
