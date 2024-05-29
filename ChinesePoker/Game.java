@@ -3,6 +3,7 @@ import java.util.*;
 public class Game{
   ArrayList<Player> players;
   public Hand deck;
+ // ArrayList<PImage> cardImgs;
 
   public Game(){
     this.players = new ArrayList<Player>(4);
@@ -71,6 +72,13 @@ public class Game{
     deal();
   }
 
+  //public void displayCards(){
+  // for(int i = 0; i < 13; i++){
+  //    Card card = players.get(i).getDeck().getCard(i);
+  //    cardImgs.add(loadImage(card.cardimage()));
+  //  }
+  //}
+
   public void deal(){
     ArrayList<Card> cards = new ArrayList<Card>(13);
     for(int i = 0; i < 13; i++){
@@ -97,7 +105,14 @@ public class Game{
     players.add(new Player("Opponent 3", new Hand(cards)));
   }
 
-
+  public boolean end(){
+    for(int i = 0; i < 4; i++){
+      if(players.get(i).getDeck().size() == 0){
+        return true;
+      }
+    }
+    return false;
+  }
 /*	public static void main(String[] args){
 		ArrayList<Player> people = new ArrayList<Player>();
 		Game test = new Game(people);

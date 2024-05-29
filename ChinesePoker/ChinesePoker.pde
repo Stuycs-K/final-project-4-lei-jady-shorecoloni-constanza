@@ -1,17 +1,12 @@
-Player player1;
-Player player2;
-Player player3;
-Player player4;
+Game game;
 
 void setup(){
   size(1350, 750);
   
-  Game game = new Game();
+  game = new Game();
   game.start();
-  player1 = game.getPlayer(0);
-    player2 = game.getPlayer(1);
-    player3 = game.getPlayer(2);
-    player4 = game.getPlayer(3);
+  Player player1 = game.getPlayer(0);
+
   
     for(int i = 0; i < 13; i++){
       Card card = player1.getDeck().getCard(i);
@@ -25,4 +20,13 @@ void setup(){
   //    }
   //  }
   //}
+}
+
+void draw(){
+//display cards (?)
+  while(game.end() != true){
+    for(int i = 0; i < 4; i++){
+      game.getPlayer(i).play();
+    }
+  }
 }

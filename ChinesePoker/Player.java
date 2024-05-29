@@ -22,5 +22,8 @@ public class Player{
   public Hand getSelectedHand(){
     return selectedHand;
   }
+  
+  public void play(){
+  }
 
 }
