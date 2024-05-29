@@ -18,7 +18,7 @@ public class Game{
 			int num = j;
 			if(num>13)
 				num -= 13;
-			cards.add(new Card(suit+num, j-2, suit));
+			cards.add(new Card(suit+num, (j-2), suit));
 		}
 		 suit = "diamond";
 		for(int j = 3; j < 16; j++){
@@ -32,14 +32,14 @@ public class Game{
 			int num = j;
 			if(num>13)
 				num -= 13;
-			cards.add(new Card(suit+num, j- 2, suit));
+			cards.add(new Card(suit+num, (j- 2), suit));
 		}
 		 suit = "spade";
 		for(int j = 3; j < 16; j++){
 			int num = j;
 			if(num>13)
 				num -= 13;
-			cards.add(new Card(suit+num, j- 2, suit));
+			cards.add(new Card(suit+num, (j- 2), suit));
 		}
 		return cards;
 	}
@@ -58,7 +58,7 @@ public class Game{
 	public String toString(){
 		String result = "";
 		for(int i = 0; i < 52; i++){
-			result += (deck.getCard(i).getName()) + "\n";
+			result += (deck.getCard(i).getName()) + ", " + deck.getCard(i).getStrength() + "\n";
 		}
 		return result;
 	}
@@ -68,5 +68,5 @@ public class Game{
 		test.shuffleDeck();
 		System.out.println(test.toString());
 	}
-  */
+*/
 }
