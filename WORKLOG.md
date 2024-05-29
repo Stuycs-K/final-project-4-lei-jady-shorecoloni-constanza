@@ -28,3 +28,18 @@ took APUSH!!
 
 worked on writing Hand class add/remove methods and added all of the card faces from Playing Cards on Demand.
 
+### May 24, 2024
+
+Started work creating a function that would return if a set was valid. 
+
+### May 27, 2024
+
+Fixed some errors and wrote out rest of function that would return if a set was valid. Also wrote function that was meant to return all valid sets.
+
+### May 28, 2024
+
+Working on fixing functions in Hand.
+
+### May 29, 2024
+
+
