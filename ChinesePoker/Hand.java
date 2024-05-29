@@ -143,15 +143,7 @@ public class Hand{
   }
 
   public Hand compareStrength(Hand other){
-    int thisStrength = 0;
-    for(Card card: this.hand){
-      thisStrength += card.getStrength();
-    }
-    int otherStrength = 0;
-    for(Card card: other.hand){
-      otherStrength += card.strength();
-    }
-    if(thisStrength > otherStrength)
+    if(this.deckStrength() > other.deckStrength())
       return this;
     return other;
   }
