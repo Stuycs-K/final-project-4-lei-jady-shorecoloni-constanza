@@ -69,9 +69,8 @@ public class Game{
   public void start(){
     shuffleDeck();
     deal();
-    
   }
-  
+
   public void deal(){
     ArrayList<Card> cards = new ArrayList<Card>(13);
     for(int i = 0; i < 13; i++){
