@@ -200,4 +200,59 @@ public class Hand {
     System.out.println(testSets.toString());
   }
 
+  public int deckStrength(){
+    int thisStrength = 0;
+    for(Card card: this.hand){
+      int cardStrength = card.getStrength();
+      if (card.getSuit().equals("clover")) {
+        cardStrength *= 2;
+      } else if (card.getSuit().equals("heart")) {
+        cardStrength *= 3;
+      } else if (card.getSuit().equals("spade")) {
+        cardStrength *= 4;
+      }
+      thisStrength += cardStrength
+    }
+    if (this.hand.size() == 5) {
+      int[] strengths = { set.get(0).getStrength(), set.get(1).getStrength(), set.get(2).getStrength(), set.get(3).getStrength(), set.get(4).getStrength() };
+      Arrays.sort(strengths);
+      if isStraight(strengths) {
+        thisStrength *= 2;
+      }
+      if isFlush() {
+        thisStrength *= 3;
+      }
+      if isHouse() {
+        thisStrength *= 4;
+      }
+      if isFour() {
+        thisStrength *= 5;
+      }
+    }
+    return thisStrength;
+  }
+  // testing for particular sets (redundant, i know, but it should work)
+  private boolean isStraight(int[] strengths) {
+    return (strengths[4] - strengths[3] == 1 && strengths[3] - strengths[2] == 1 && strengths[2] - strengths[1] == 1 && strengths[1] - strengths[0] == 1);
+  }
+  private boolean isFlush() {
+    return ((set.size() == 5) && (set.get(0).getSuit().equals(set.get(1).getSuit())) &&
+          (set.get(1).getSuit().equals(set.get(2).getSuit())) &&
+          (set.get(2).getSuit().equals(set.get(3).getSuit())) &&
+          (set.get(3).getSuit().equals(set.get(4).getSuit())));
+  }
+  private boolean isHouse(int[] strengths) {
+    return ((strengths[0] == strengths[2] && strengths[3] == strengths[4]) || (strengths[0] == strengths[1] && strengths[2] == strengths[4]));
+  }
+  private boolean isFour(int[] strengths) {
+    return (strengths[0] == strengths[3] || strengths[1] == strengths[4]);
+  }
+
+
+  public Hand compareStrength(Hand other){
+    if(this.deckStrength() > other.deckStrength())
+      return this;
+    return other;
+  }
+//diamond clover heart spades
 }
