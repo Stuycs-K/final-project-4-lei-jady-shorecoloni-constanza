@@ -1,6 +1,21 @@
+Player player1;
+Player player2;
+Player player3;
+Player player4;
+
 void setup(){
   size(1350, 750);
-  image(loadImage("Images/diamond1.png"), width/3, height - 200, 100, 100*337/240);
-  image(loadImage("Images/diamond2.png"), width/3 + 40, height - 200, 100, 100*337/240);
-
+  
+  Game game = new Game();
+  game.start();
+  player1 = game.getPlayer(0);
+  player2 = game.getPlayer(1);
+  player3 = game.getPlayer(2);
+  player4 = game.getPlayer(3);
+  
+  for(int i = 0; i < 13; i++){
+    Card card = player1.getDeck().getCard(i);
+    image(loadImage(card.cardimage()), width/3 + (i*40), height - 200, 100, 100*337/240);
+  }
+  
 }

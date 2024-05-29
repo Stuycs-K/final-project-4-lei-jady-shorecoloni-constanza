@@ -10,7 +10,10 @@ public class Game{
 		deck.addCards(createDeck());
 
   }
-
+  
+  public Player getPlayer(int index){
+    return players.get(index);
+  }
 	private static ArrayList<Card> createDeck(){
 		ArrayList<Card> cards = new ArrayList<Card>(52);
 		String suit = "clover";
