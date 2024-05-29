@@ -18,7 +18,7 @@ public class Game{
 			int num = j;
 			if(num>13)
 				num -= 13;
-			cards.add(new Card(suit+num, (j-2)*2, suit));
+			cards.add(new Card(suit+num, (j-2), suit));
 		}
 		 suit = "diamond";
 		for(int j = 3; j < 16; j++){
@@ -32,14 +32,14 @@ public class Game{
 			int num = j;
 			if(num>13)
 				num -= 13;
-			cards.add(new Card(suit+num, (j- 2)*3, suit));
+			cards.add(new Card(suit+num, (j- 2), suit));
 		}
 		 suit = "spade";
 		for(int j = 3; j < 16; j++){
 			int num = j;
 			if(num>13)
 				num -= 13;
-			cards.add(new Card(suit+num, (j- 2)*4, suit));
+			cards.add(new Card(suit+num, (j- 2), suit));
 		}
 		return cards;
 	}
