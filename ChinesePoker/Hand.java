@@ -7,8 +7,10 @@ public class Hand {
     hand = new ArrayList<Card>();
   }
 
-  public Hand(ArrayList<Card> hand) {
-    this.hand = hand;
+  public Hand(ArrayList<Card> newHand) {
+    hand = new ArrayList<Card>();
+    hand.addAll(newHand.size(), newHand);
+    // this.hand = ArrayList.addAll(hand.size(), hand);
   }
 
   public int size() {
@@ -124,28 +126,28 @@ public class Hand {
     return (single || pair || straight || flush || house || four);
   }
 
-  public ArrayList<Hand> possibleSets(ArrayList<Hand> sets, int remaining, ArrayList<Card> partial,
+  public ArrayList<Hand> possibleSets(ArrayList<Hand> sets, int size, ArrayList<Card> partial,
       ArrayList<Card> cardsRemaining) {
     // if (size > cardsRemaining.size()) {
     // return sets;
     // }
-    if (remaining <= 0 || cardsRemaining.size() == 0) {
+    if ( size <= 0 || cardsRemaining.size() == 0) {
       // print testing
-      // System.out.print("[");
-      // for (Card c : partial) {
-      // System.out.print(c.getStrength());
-      // System.out.print(", ");
-      // }
-      // System.out.println("]");
+          // System.out.print("[");
+          // for (Card c : partial) {
+          // System.out.print(c.getStrength());
+          // System.out.print(", ");
+          // }
+          // System.out.println("]");
       // end of print testing
 
-      if (isPossibleSet(hand)) {
-        System.out.print("[");
-        for (Card c : partial) {
-          System.out.print(c.getStrength());
-          System.out.print(", ");
-        }
-        System.out.println("]");
+      if (isPossibleSet(hand) && hand.size() > 0) {
+                      System.out.print("[");
+                      for (Card c : partial) {
+                        System.out.print(c.getStrength());
+                        System.out.print(", ");
+                      }
+                      System.out.println("]");
 
         sets.add(new Hand(partial));
       }
@@ -154,7 +156,8 @@ public class Hand {
         Card c = cardsRemaining.get(i);
         partial.add(c);
         cardsRemaining.remove(i);
-        possibleSets(sets, remaining - 1, partial, cardsRemaining);
+        // ArrayList<Card> newPartial = (ArrayList<Card>)partial.clone();
+        possibleSets(sets, size-1, partial, cardsRemaining);
         cardsRemaining.add(i, c);
         partial.remove(c);
       }
