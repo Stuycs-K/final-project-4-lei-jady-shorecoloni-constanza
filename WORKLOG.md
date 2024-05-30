@@ -18,6 +18,22 @@ Created Player and Game classes
 
 continued working on Game class. Added helper method to create deck of cards for constructor, wrote shuffleDeck(), and tested them
 
+### May 28, 2024
+
+Hand function that returns deck strength, played around with display of card images in Processing and added Game start() method
+
+### May 29, 2024
+
+work on/tried (but did not succeed) to make 'play' button and mouseClicked(), started working on setup and draw
+
+### May 30, 2024
+
+
+
+### May 31, 2024
+
+
+
 ## Jady Lei
 
 ### May 22, 2024
