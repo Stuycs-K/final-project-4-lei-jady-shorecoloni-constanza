@@ -133,12 +133,12 @@ public class Hand {
     // }
     if ( size <= 0 || cardsRemaining.size() == 0) {
       // print testing
-          // System.out.print("[");
-          // for (Card c : partial) {
-          // System.out.print(c.getStrength());
-          // System.out.print(", ");
-          // }
-          // System.out.println("]");
+          System.out.print("[");
+          for (Card c : partial) {
+          System.out.print(c.getStrength());
+          System.out.print(", ");
+          }
+          System.out.println("]");
       // end of print testing
 
       if (isPossibleSet(partial) && partial.size() > 0) {
@@ -196,12 +196,14 @@ public class Hand {
     test1.addCard(new Card("1", 1, "diamond"));
     test1.addCard(new Card("2", 2, "diamond"));
     test1.addCard(new Card("2", 2, "clover"));
-    test1.addCard(new Card("2", 2, "heart"));
+    // test1.addCard(new Card("2", 2, "heart"));
     test1.addCard(new Card("2", 2, "spade"));
+    test1.addCard(new Card("3", 3, "spade"));
+    test1.addCard(new Card("3", 3, "heart"));
     ArrayList<Hand> testSets = test1.possibleSets(test1.getHand());
-    for (Hand h : testSets) {
-      System.out.println(h.deckStrength());
-    }
+    // for (Hand h : testSets) {
+    //   System.out.println(h.deckStrength());
+    // }
     System.out.println(testSets.toString());
   }
 
