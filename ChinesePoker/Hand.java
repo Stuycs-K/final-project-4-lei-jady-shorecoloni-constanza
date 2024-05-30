@@ -197,10 +197,14 @@ public class Hand {
     test1.addCard(new Card("2", 2, "diamond"));
     test1.addCard(new Card("2", 2, "diamond"));
     ArrayList<Hand> testSets = test1.possibleSets(test1.getHand());
+    for (Hand h : testSets) {
+      System.out.println(h.deckStrength());
+    }
     System.out.println(testSets.toString());
   }
 
   public int deckStrength(){
+    ArrayList<Card> set = this.getHand();
     int thisStrength = 0;
     for(Card card: this.hand){
       int cardStrength = card.getStrength();
@@ -211,21 +215,21 @@ public class Hand {
       } else if (card.getSuit().equals("spade")) {
         cardStrength *= 4;
       }
-      thisStrength += cardStrength
+      thisStrength += cardStrength;
     }
     if (this.hand.size() == 5) {
       int[] strengths = { set.get(0).getStrength(), set.get(1).getStrength(), set.get(2).getStrength(), set.get(3).getStrength(), set.get(4).getStrength() };
       Arrays.sort(strengths);
-      if isStraight(strengths) {
+      if (isStraight(strengths)) {
         thisStrength *= 2;
       }
-      if isFlush() {
+      if (isFlush()) {
         thisStrength *= 3;
       }
-      if isHouse() {
+      if (isHouse(strengths)) {
         thisStrength *= 4;
       }
-      if isFour() {
+      if (isFour(strengths)) {
         thisStrength *= 5;
       }
     }
@@ -236,10 +240,10 @@ public class Hand {
     return (strengths[4] - strengths[3] == 1 && strengths[3] - strengths[2] == 1 && strengths[2] - strengths[1] == 1 && strengths[1] - strengths[0] == 1);
   }
   private boolean isFlush() {
-    return ((set.size() == 5) && (set.get(0).getSuit().equals(set.get(1).getSuit())) &&
-          (set.get(1).getSuit().equals(set.get(2).getSuit())) &&
-          (set.get(2).getSuit().equals(set.get(3).getSuit())) &&
-          (set.get(3).getSuit().equals(set.get(4).getSuit())));
+    return ((hand.size() == 5) && (hand.get(0).getSuit().equals(hand.get(1).getSuit())) &&
+          (hand.get(1).getSuit().equals(hand.get(2).getSuit())) &&
+          (hand.get(2).getSuit().equals(hand.get(3).getSuit())) &&
+          (hand.get(3).getSuit().equals(hand.get(4).getSuit())));
   }
   private boolean isHouse(int[] strengths) {
     return ((strengths[0] == strengths[2] && strengths[3] == strengths[4]) || (strengths[0] == strengths[1] && strengths[2] == strengths[4]));
