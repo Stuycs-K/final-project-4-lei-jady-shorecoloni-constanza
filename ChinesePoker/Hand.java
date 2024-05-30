@@ -18,7 +18,7 @@ public class Hand {
     return hand.size();
   }
 
-  private boolean addCard(Card card) {
+  public boolean addCard(Card card){
     return hand.add(card);
   }
 
@@ -127,19 +127,18 @@ public class Hand {
     return (single || pair || straight || flush || house || four);
   }
 
-  public ArrayList<Hand> possibleSets(ArrayList<Hand> sets, int size, ArrayList<Card> partial,
-      ArrayList<Card> cardsRemaining) {
+  public ArrayList<Hand> possibleSets(int i, ArrayList<Hand> sets, int size, ArrayList<Card> partial, ArrayList<Card> cardsRemaining) {
     // if (size > cardsRemaining.size()) {
     // return sets;
     // }
     if ( size <= 0 || cardsRemaining.size() == 0) {
       // print testing
-          // System.out.print("[");
-          // for (Card c : partial) {
-          // System.out.print(c.getStrength());
-          // System.out.print(", ");
-          // }
-          // System.out.println("]");
+          System.out.print("[");
+          for (Card c : partial) {
+          System.out.print(c.getStrength());
+          System.out.print(", ");
+          }
+          System.out.println("]");
       // end of print testing
 
       if (isPossibleSet(partial) && partial.size() > 0) {
@@ -153,13 +152,14 @@ public class Hand {
         sets.add(new Hand(partial));
       }
     } else {
-      for (int i = 0; i < cardsRemaining.size(); i++) {
-        Card c = cardsRemaining.get(i);
+      cardsRemaining.sort(null);
+      for (int j = i; j < cardsRemaining.size(); j++) {
+        Card c = cardsRemaining.get(j);
         partial.add(c);
-        cardsRemaining.remove(i);
+        cardsRemaining.remove(j);
         // ArrayList<Card> newPartial = (ArrayList<Card>)partial.clone();
-        possibleSets(sets, size-1, partial, cardsRemaining);
-        cardsRemaining.add(i, c);
+        possibleSets(i + j, sets, size-1, partial, cardsRemaining);
+        cardsRemaining.add(j, c);
         partial.remove(c);
       }
     }
@@ -168,13 +168,13 @@ public class Hand {
 
   public ArrayList<Hand> possibleSets(ArrayList<Card> cardsRemaining) {
     ArrayList<Hand> all = new ArrayList<Hand>();
-    ArrayList<Hand> singles = possibleSets(new ArrayList<Hand>(), 1, new ArrayList<Card>(), cardsRemaining);
+    ArrayList<Hand> singles = possibleSets(0, new ArrayList<Hand>(), 1, new ArrayList<Card>(), cardsRemaining);
     // System.out.println(singles.toString());
     for (Hand h : singles) {
       all.add(h);
     }
     if (cardsRemaining.size() >= 2) {
-      ArrayList<Hand> doubles = possibleSets(new ArrayList<Hand>(), 2, new
+      ArrayList<Hand> doubles = possibleSets(0, new ArrayList<Hand>(), 2, new
       ArrayList<Card>(), cardsRemaining);
       // System.out.println(doubles.toString());
       for (Hand h : doubles) {
@@ -182,7 +182,7 @@ public class Hand {
       }
     }
     if (cardsRemaining.size() >= 5) {
-      ArrayList<Hand> sets = possibleSets(new ArrayList<Hand>(), 5, new ArrayList<Card>(), cardsRemaining);
+      ArrayList<Hand> sets = possibleSets(0, new ArrayList<Hand>(), 5, new ArrayList<Card>(), cardsRemaining);
       // System.out.println(sets.toString());
       for (Hand h : sets) {
         all.add(h);
@@ -195,9 +195,72 @@ public class Hand {
     Hand test1 = new Hand();
     test1.addCard(new Card("1", 1, "diamond"));
     test1.addCard(new Card("2", 2, "diamond"));
-    test1.addCard(new Card("2", 2, "diamond"));
+    test1.addCard(new Card("2", 2, "clover"));
+    // test1.addCard(new Card("2", 2, "heart"));
+    test1.addCard(new Card("2", 2, "spade"));
+    test1.addCard(new Card("3", 3, "spade"));
+    test1.addCard(new Card("3", 3, "heart"));
     ArrayList<Hand> testSets = test1.possibleSets(test1.getHand());
+    // for (Hand h : testSets) {
+    //   System.out.println(h.deckStrength());
+    // }
     System.out.println(testSets.toString());
   }
 
+  public int deckStrength(){
+    ArrayList<Card> set = this.getHand();
+    int thisStrength = 0;
+    for(Card card: this.hand){
+      int cardStrength = card.getStrength();
+      if (card.getSuit().equals("clover")) {
+        cardStrength *= 2;
+      } else if (card.getSuit().equals("heart")) {
+        cardStrength *= 3;
+      } else if (card.getSuit().equals("spade")) {
+        cardStrength *= 4;
+      }
+      thisStrength += cardStrength;
+    }
+    if (this.hand.size() == 5) {
+      int[] strengths = { set.get(0).getStrength(), set.get(1).getStrength(), set.get(2).getStrength(), set.get(3).getStrength(), set.get(4).getStrength() };
+      Arrays.sort(strengths);
+      if (isStraight(strengths)) {
+        thisStrength *= 2;
+      }
+      if (isFlush()) {
+        thisStrength *= 3;
+      }
+      if (isHouse(strengths)) {
+        thisStrength *= 4;
+      }
+      if (isFour(strengths)) {
+        thisStrength *= 5;
+      }
+    }
+    return thisStrength;
+  }
+  // testing for particular sets (redundant, i know, but it should work)
+  private boolean isStraight(int[] strengths) {
+    return (strengths[4] - strengths[3] == 1 && strengths[3] - strengths[2] == 1 && strengths[2] - strengths[1] == 1 && strengths[1] - strengths[0] == 1);
+  }
+  private boolean isFlush() {
+    return ((hand.size() == 5) && (hand.get(0).getSuit().equals(hand.get(1).getSuit())) &&
+          (hand.get(1).getSuit().equals(hand.get(2).getSuit())) &&
+          (hand.get(2).getSuit().equals(hand.get(3).getSuit())) &&
+          (hand.get(3).getSuit().equals(hand.get(4).getSuit())));
+  }
+  private boolean isHouse(int[] strengths) {
+    return ((strengths[0] == strengths[2] && strengths[3] == strengths[4]) || (strengths[0] == strengths[1] && strengths[2] == strengths[4]));
+  }
+  private boolean isFour(int[] strengths) {
+    return (strengths[0] == strengths[3] || strengths[1] == strengths[4]);
+  }
+
+
+  public Hand compareStrength(Hand other){
+    if(this.deckStrength() > other.deckStrength())
+      return this;
+    return other;
+  }
+//diamond clover heart spades
 }
