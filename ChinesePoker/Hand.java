@@ -127,8 +127,7 @@ public class Hand {
     return (single || pair || straight || flush || house || four);
   }
 
-  public ArrayList<Hand> possibleSets(ArrayList<Hand> sets, int size, ArrayList<Card> partial,
-      ArrayList<Card> cardsRemaining) {
+  public ArrayList<Hand> possibleSets(int i, ArrayList<Hand> sets, int size, ArrayList<Card> partial, ArrayList<Card> cardsRemaining) {
     // if (size > cardsRemaining.size()) {
     // return sets;
     // }
@@ -153,13 +152,14 @@ public class Hand {
         sets.add(new Hand(partial));
       }
     } else {
-      for (int i = 0; i < cardsRemaining.size(); i++) {
-        Card c = cardsRemaining.get(i);
+      cardsRemaining.sort(null);
+      for (int j = i; j < cardsRemaining.size(); j++) {
+        Card c = cardsRemaining.get(j);
         partial.add(c);
-        cardsRemaining.remove(i);
+        cardsRemaining.remove(j);
         // ArrayList<Card> newPartial = (ArrayList<Card>)partial.clone();
-        possibleSets(sets, size-1, partial, cardsRemaining);
-        cardsRemaining.add(i, c);
+        possibleSets(i + j, sets, size-1, partial, cardsRemaining);
+        cardsRemaining.add(j, c);
         partial.remove(c);
       }
     }
@@ -168,13 +168,13 @@ public class Hand {
 
   public ArrayList<Hand> possibleSets(ArrayList<Card> cardsRemaining) {
     ArrayList<Hand> all = new ArrayList<Hand>();
-    ArrayList<Hand> singles = possibleSets(new ArrayList<Hand>(), 1, new ArrayList<Card>(), cardsRemaining);
+    ArrayList<Hand> singles = possibleSets(0, new ArrayList<Hand>(), 1, new ArrayList<Card>(), cardsRemaining);
     // System.out.println(singles.toString());
     for (Hand h : singles) {
       all.add(h);
     }
     if (cardsRemaining.size() >= 2) {
-      ArrayList<Hand> doubles = possibleSets(new ArrayList<Hand>(), 2, new
+      ArrayList<Hand> doubles = possibleSets(0, new ArrayList<Hand>(), 2, new
       ArrayList<Card>(), cardsRemaining);
       // System.out.println(doubles.toString());
       for (Hand h : doubles) {
@@ -182,7 +182,7 @@ public class Hand {
       }
     }
     if (cardsRemaining.size() >= 5) {
-      ArrayList<Hand> sets = possibleSets(new ArrayList<Hand>(), 5, new ArrayList<Card>(), cardsRemaining);
+      ArrayList<Hand> sets = possibleSets(0, new ArrayList<Hand>(), 5, new ArrayList<Card>(), cardsRemaining);
       // System.out.println(sets.toString());
       for (Hand h : sets) {
         all.add(h);
@@ -195,7 +195,9 @@ public class Hand {
     Hand test1 = new Hand();
     test1.addCard(new Card("1", 1, "diamond"));
     test1.addCard(new Card("2", 2, "diamond"));
-    test1.addCard(new Card("2", 2, "diamond"));
+    test1.addCard(new Card("2", 2, "clover"));
+    test1.addCard(new Card("2", 2, "heart"));
+    test1.addCard(new Card("2", 2, "spade"));
     ArrayList<Hand> testSets = test1.possibleSets(test1.getHand());
     for (Hand h : testSets) {
       System.out.println(h.deckStrength());
