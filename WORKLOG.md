@@ -28,7 +28,7 @@ work on/tried (but did not succeed) to make 'play' button and mouseClicked(), st
 
 ### May 30, 2024
 
-
+Wrote mouseClicked() and keyPressed() - when cards are selected, they move up and when return/enter is pressed (plays selected hand), the cards are removed from hand
 
 ### May 31, 2024
 
