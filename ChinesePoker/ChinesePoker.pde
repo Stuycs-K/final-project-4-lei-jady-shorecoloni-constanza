@@ -1,5 +1,6 @@
 Game game;
-//int hi = 12;
+ArrayList<PImage> images;
+
 void setup(){
   size(1350, 750);
   
@@ -7,7 +8,12 @@ void setup(){
   game.start();
   Player player1 = game.getPlayer(0);
 
-  
+  for(int i = 0; i < 4; i++){
+    for(int j = 0; j < 13; j++){
+    //  images.add(loadImage(game.getPlayer(i).getDeck().getCard(j).cardimage()));
+    }
+  }
+
   //  for(int i = 0; i < 13; i++){
   //    Card card = player1.getDeck().getCard(i);
   //    image(loadImage(card.cardimage()), width/3 - 50+ (i*40), height - 200, 100, 100*337/240);
@@ -26,7 +32,7 @@ void setup(){
 
 void draw(){
   background(204);
- for(int i = 0; i < 13; i++){
+ for(int i = 0; i < game.getPlayer(0).getDeck().size(); i++){
    if(!(game.getPlayer(0).getDeck().getCard(i).isSelected())){
      fill(250);
      rect(width/3 - 50 + (i*40), height - 150, 100, 140*(337/240), 28);
@@ -36,29 +42,28 @@ void draw(){
      rect(width/3 - 50 + (i*40), height - 210, 100, 140*(337/240), 28);
    }
  }
-//display cards (?)
-  /*while(game.end() != true){
-    for(int i = 0; i < 4; i++){
-      game.getPlayer(i).play();  //only move on if key pressed?
-    }
-  }*/
 }
-/*
-void mouseClicked(){
-  int test = (mouseX+ 50 - (width/3)) / 40;
-  text(""+test, 50, 50);
-  rect(0, 0, width, height);
-
-}*/
 
 void mouseClicked(){
   int test = ((int)mouseX + 40 - (width/3)) / 40;
- // rect(mouseX, mouseY, test, test);
-// if(game.getPlayer(0).getDeck().getCard(test).isSelected()){
-   game.getPlayer(0).getDeck().getCard(test).changeSelect();
-   text("card: " + test, 0, 0);
- //}
- //hi++;
-// background(250);
- redraw();
+  if(mouseY < (height - 210 + 140*337/240) && test >= 0 && test < 13){
+    Card card = game.getPlayer(0).getDeck().getCard(test);
+    if(card.isSelected()){
+      game.getPlayer(0).unselect(card);
+    }
+    else{
+      game.getPlayer(0).select(card);
+    }
+    card.changeSelect();
+  }
+  //redraw();
+}
+
+void keyPressed(){
+  //if(key === CODED){
+    if(key == ENTER || key == RETURN || key == 'p'){
+      game.getPlayer(0).play();
+      redraw();
+    }
+ // }
 }

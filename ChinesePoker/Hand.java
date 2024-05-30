@@ -34,6 +34,18 @@ public class Hand{
   public Card removeCard(int index){
     return hand.remove(index);
   }
+  
+  public void removeCard(ArrayList<Card> cards){
+    for(int i = 0; i < cards.size(); i++){
+      hand.remove(cards.get(i));
+    }
+ //   return card;
+  }
+  
+  public void removeCard(Card card){
+    hand.remove(card);
+  }
+  
   public ArrayList<Card> removeCards(ArrayList<Integer> indexes){
     ArrayList<Card> removed = new ArrayList<Card>(indexes.size());
     for(int i = indexes.size() - 1; i >= 0; i--){

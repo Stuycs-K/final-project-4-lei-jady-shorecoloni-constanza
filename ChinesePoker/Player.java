@@ -25,12 +25,19 @@ public class Player{
   
   public void play(){
    // if(){
- //     deck.remove(selectedHand.getHand());
+     for(Card card : selectedHand.getHand()){
+       deck.removeCard(card);
+     }
+     // deck.removeCard(selectedHand.getHand());
  //   }
   }
   
   public void select(Card card){
     selectedHand.addCard(card);
+  }
+  
+  public void unselect(Card card){
+    selectedHand.removeCard(card);
   }
 
 }
