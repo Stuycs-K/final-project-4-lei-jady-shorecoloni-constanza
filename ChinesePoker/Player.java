@@ -22,5 +22,15 @@ public class Player{
   public Hand getSelectedHand(){
     return selectedHand;
   }
+  
+  public void play(){
+   // if(){
+ //     deck.remove(selectedHand.getHand());
+ //   }
+  }
+  
+  public void select(Card card){
+    selectedHand.addCard(card);
+  }
 
 }

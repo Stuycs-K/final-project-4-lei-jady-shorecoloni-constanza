@@ -22,7 +22,7 @@ public class Card implements Comparable<Card>{
   }
   
   public String cardimage(){
-    return "" + strength + suit + ".png";
+    return "Images/" + name+".png";
   } 
 
   // hopefully can be used by a sort method to ort the cards.
