@@ -15,7 +15,7 @@ public class Hand{
 	   return hand.size();
   }
 
-  private boolean addCard(Card card){
+  public boolean addCard(Card card){
     return hand.add(card);
   }
   public boolean addCards(ArrayList<Card> cards){
