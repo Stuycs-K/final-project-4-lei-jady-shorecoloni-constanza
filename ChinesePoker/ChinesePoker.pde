@@ -25,6 +25,7 @@ void setup(){
 }
 
 void draw(){
+  background(204);
  for(int i = 0; i < 13; i++){
    if(!(game.getPlayer(0).getDeck().getCard(i).isSelected())){
      fill(250);
@@ -51,11 +52,13 @@ void mouseClicked(){
 }*/
 
 void mouseClicked(){
-  int test = ((int)mouseX + 50 - (width/3)) / 40;
+  int test = ((int)mouseX + 40 - (width/3)) / 40;
  // rect(mouseX, mouseY, test, test);
 // if(game.getPlayer(0).getDeck().getCard(test).isSelected()){
    game.getPlayer(0).getDeck().getCard(test).changeSelect();
+   text("card: " + test, 0, 0);
  //}
  //hi++;
+// background(250);
  redraw();
 }
