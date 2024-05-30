@@ -9,7 +9,10 @@ public class Hand {
 
   public Hand(ArrayList<Card> newHand) {
     hand = new ArrayList<Card>();
-    hand = (ArrayList<Card>) newHand.clone();
+    for (Card c : newHand) {
+      hand.add(c);
+    }
+    // hand = (ArrayList<Card>) newHand.clone();
     // hand.addAll(newHand.size(), newHand);
     // this.hand = ArrayList.addAll(hand.size(), hand);
   }
@@ -152,7 +155,6 @@ public class Hand {
         sets.add(new Hand(partial));
       }
     } else {
-      cardsRemaining.sort(null);
       for (int j = i; j < cardsRemaining.size(); j++) {
         Card c = cardsRemaining.get(j);
         partial.add(c);
@@ -167,6 +169,7 @@ public class Hand {
   }
 
   public ArrayList<Hand> possibleSets(ArrayList<Card> cardsRemaining) {
+    cardsRemaining.sort(null);
     ArrayList<Hand> all = new ArrayList<Hand>();
     ArrayList<Hand> singles = possibleSets(0, new ArrayList<Hand>(), 1, new ArrayList<Card>(), cardsRemaining);
     // System.out.println(singles.toString());
