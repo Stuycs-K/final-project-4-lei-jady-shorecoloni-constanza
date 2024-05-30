@@ -162,7 +162,7 @@ public class Hand {
         // ArrayList<Card> newPartial = (ArrayList<Card>)partial.clone();
         possibleSets(i + j, sets, size-1, partial, cardsRemaining);
         cardsRemaining.add(j, c);
-        partial.remove(c);
+        partial.remove(partial.size() - 1);
       }
     }
     return sets;
