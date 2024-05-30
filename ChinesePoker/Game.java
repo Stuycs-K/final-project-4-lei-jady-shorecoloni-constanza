@@ -70,6 +70,19 @@ public class Game{
   public void start(){
     shuffleDeck();
     deal();
+	int active = 0;
+	Card diamond3 = new Card("diamond3", 1, "diamond");
+	if (players.get(1).getDeck().getHand().contains(diamond3)) {
+		active = 1;
+	} else if (players.get(2).getDeck().getHand().contains(diamond3)) {
+		active = 2;
+	} else if (players.get(3).getDeck().getHand().contains(diamond3)) {
+		active = 3;
+	}
+	while (!end()) {
+		active %= 4;
+		active ++;
+	}
   }
 
   //public void displayCards(){

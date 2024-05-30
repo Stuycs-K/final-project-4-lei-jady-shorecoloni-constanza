@@ -85,7 +85,7 @@ public class Hand {
 
   // }
 
-  private boolean isPossibleSet(ArrayList<Card> set) {
+  public boolean isPossibleSet(ArrayList<Card> set) {
     // assumes set given is of valid lengths 1, 2, 5
     // 1
     boolean single = false, pair = false, straight = false, flush = false, house = false, four = false;
