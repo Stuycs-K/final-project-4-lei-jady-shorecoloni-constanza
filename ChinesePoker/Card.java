@@ -2,11 +2,21 @@ public class Card implements Comparable<Card>{
   private String name;
   private int strength;
   private String suit;
+  private boolean selected;
   
   public Card(String name, int strength, String suit){
     this.name = name;
     this.strength = strength;
     this.suit = suit;
+    selected = false;
+  }
+  
+  public boolean isSelected(){
+    return selected;
+  }
+  
+  public void changeSelect(){
+    selected = !selected;
   }
   
   public int getStrength(){
