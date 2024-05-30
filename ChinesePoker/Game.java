@@ -3,14 +3,18 @@ import java.util.*;
 public class Game{
   ArrayList<Player> players;
   public Hand deck;
+ // ArrayList<PImage> cardImgs;
 
-  public Game(ArrayList<Player> players){
-    this.players = players;
+  public Game(){
+    this.players = new ArrayList<Player>(4);
     deck = new Hand();
 		deck.addCards(createDeck());
 
   }
-
+  
+  public Player getPlayer(int index){
+    return players.get(index);
+  }
 	private static ArrayList<Card> createDeck(){
 		ArrayList<Card> cards = new ArrayList<Card>(52);
 		String suit = "clover";
@@ -62,6 +66,53 @@ public class Game{
 		}
 		return result;
 	}
+
+  public void start(){
+    shuffleDeck();
+    deal();
+  }
+
+  //public void displayCards(){
+  // for(int i = 0; i < 13; i++){
+  //    Card card = players.get(i).getDeck().getCard(i);
+  //    cardImgs.add(loadImage(card.cardimage()));
+  //  }
+  //}
+
+  public void deal(){
+    ArrayList<Card> cards = new ArrayList<Card>(13);
+    for(int i = 0; i < 13; i++){
+      cards.add(deck.getCard(i));
+    }
+    players.add(new Player("You", new Hand(cards)));
+    
+    cards = new ArrayList<Card>(13);
+    for(int i = 13; i< 26; i++){
+      cards.add(deck.getCard(i));
+    }
+    players.add(new Player("Opponent 1", new Hand(cards)));
+    
+    cards = new ArrayList<Card>(13);
+    for(int i = 26; i< 39; i++){
+      cards.add(deck.getCard(i));
+    }
+    players.add(new Player("Opponent 2", new Hand(cards)));
+    
+    cards = new ArrayList<Card>(13);
+    for(int i = 39; i< 52; i++){
+      cards.add(deck.getCard(i));
+    }
+    players.add(new Player("Opponent 3", new Hand(cards)));
+  }
+
+  public boolean end(){
+    for(int i = 0; i < 4; i++){
+      if(players.get(i).getDeck().size() == 0){
+        return true;
+      }
+    }
+    return false;
+  }
 /*	public static void main(String[] args){
 		ArrayList<Player> people = new ArrayList<Player>();
 		Game test = new Game(people);
