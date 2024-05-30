@@ -42,4 +42,6 @@ Working on fixing functions in Hand.
 
 ### May 29, 2024
 
-
+- got possibleSets to actually return proper sets and trimmed down the amount of sets it returned. (still needs work)
+- wrote and which means hopefully finished the strength functions as they seem to work properly on the sets that were properly returned.
+- Prev means I also wrote the boolean functions to test for each individual set.
