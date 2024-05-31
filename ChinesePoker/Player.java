@@ -35,11 +35,13 @@ public class Player {
   }
 
   public void select(Card card) {
+            System.out.println(card.getStrength());
     selectedHand.addCard(card);
     card.changeSelect();
   }
 
   public void unselect(Card card){
+            System.out.println(card.getStrength());
     selectedHand.removeCard(card);
     card.changeSelect();
   }
