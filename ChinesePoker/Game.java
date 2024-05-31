@@ -3,13 +3,14 @@ import java.util.*;
 public class Game{
   ArrayList<Player> players;
   public Hand deck;
+  private int activePlayer;
  // ArrayList<PImage> cardImgs;
 
   public Game(){
     this.players = new ArrayList<Player>(4);
     deck = new Hand();
 		deck.addCards(createDeck());
-
+	activePlayer = 0;
   }
   
   public Player getPlayer(int index){
@@ -79,10 +80,13 @@ public class Game{
 	} else if (players.get(3).getDeck().getHand().contains(diamond3)) {
 		active = 3;
 	}
-	while (!end()) {
-		active %= 4;
-		active ++;
-	}
+  }
+  public void progressGame() {
+	activePlayer ++;
+	activePlayer %= 4;
+  }
+  public Player getActivePlayer() {
+	return players.get(activePlayer);
   }
 
   //public void displayCards(){
