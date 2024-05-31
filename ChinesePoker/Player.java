@@ -30,7 +30,7 @@ public class Player {
       }
       return true;
     }
-    selectedHand.clear();
+    selectedHand.getHand().clear();
     return false;
   }
 
