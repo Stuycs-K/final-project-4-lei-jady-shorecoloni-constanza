@@ -57,7 +57,7 @@ void mouseClicked(){
 
 void keyPressed(){
   //if(key === CODED){
-    if(key == ENTER || key == RETURN || key == 'p'){
+    if(key == ENTER || key == RETURN){
       if(!started){
         started = true;
       }

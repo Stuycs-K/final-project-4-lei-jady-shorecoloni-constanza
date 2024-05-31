@@ -53,9 +53,7 @@ public class Hand {
  //   return card;
   }
 
-  public void removeCard(Card card){
-    hand.remove(card);
-  }
+
 
   public ArrayList<Card> removeCards(ArrayList<Integer> indexes){
     ArrayList<Card> removed = new ArrayList<Card>(indexes.size());
