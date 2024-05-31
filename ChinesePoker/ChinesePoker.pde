@@ -1,6 +1,7 @@
 Game game;
 ArrayList<PImage> images;
 boolean started;
+int test;
 
 void setup(){
   size(1350, 750);
@@ -40,7 +41,7 @@ void draw(){
 }
 
 void mouseClicked(){
-  int test = ((int)mouseX + 40 - (width/3)) / 40;
+  test = ((int)mouseX + 40 - (width/3)) / 40;
   if(mouseY < (height - 210 + 140*337/240) && test >= 0 && test < 13){
     Card card = game.getPlayer(0).getDeck().getCard(test);
     if(card.isSelected()){
@@ -49,7 +50,7 @@ void mouseClicked(){
     else{
       game.getPlayer(0).select(card);
     }
-    card.changeSelect();
+  //  card.changeSelect();
   }
   //redraw();
 }
