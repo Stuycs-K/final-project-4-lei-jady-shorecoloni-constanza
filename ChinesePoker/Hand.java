@@ -41,6 +41,10 @@ public class Hand {
   public Card removeCard(int index) {
     return hand.remove(index);
   }
+  public Card removeCard(Card c) {
+    hand.remove(c);
+    return c;
+  }
 
   public void removeCard(ArrayList<Card> cards){
     for(int i = 0; i < cards.size(); i++){
@@ -96,7 +100,7 @@ public class Hand {
 
   // }
 
-  private boolean isPossibleSet(ArrayList<Card> set) {
+  public static boolean isPossibleSet(ArrayList<Card> set) {
     // assumes set given is of valid lengths 1, 2, 5
     // 1
     boolean single = false, pair = false, straight = false, flush = false, house = false, four = false;

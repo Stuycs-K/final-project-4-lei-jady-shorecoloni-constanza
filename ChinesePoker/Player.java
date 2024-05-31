@@ -1,43 +1,44 @@
 import java.util.*;
 
-public class Player{
+public class Player {
   String name;
   Hand deck;
   Hand selectedHand;
 
-  public Player(String name, Hand deck){
+  public Player(String name, Hand deck) {
     this.name = name;
     this.deck = deck;
     selectedHand = new Hand();
   }
 
-  public String getName(){
+  public String getName() {
     return name;
   }
 
-  public Hand getDeck(){
+  public Hand getDeck() {
     return deck;
   }
 
-  public Hand getSelectedHand(){
+  public Hand getSelectedHand() {
     return selectedHand;
   }
-  
-  public void play(){
-   // if(){
-     for(Card card : selectedHand.getHand()){
-       deck.removeCard(card);
-     }
-     selectedHand = new Hand();
-     // deck.removeCard(selectedHand.getHand());
- //   }
+
+  public boolean play() {
+    if (Hand.isPossibleSet(selectedHand.getHand())) {
+      for (Card c : selectedHand.getHand()) {
+        deck.removeCard(c);
+      }
+      return true;
+    }
+    selectedHand.clear();
+    return false;
   }
-  
-  public void select(Card card){
+
+  public void select(Card card) {
     selectedHand.addCard(card);
     card.changeSelect();
   }
-  
+
   public void unselect(Card card){
     selectedHand.removeCard(card);
     card.changeSelect();
