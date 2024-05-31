@@ -52,7 +52,9 @@ public class Hand {
     }
  //   return card;
   }
-  
+
+
+
   public ArrayList<Card> removeCards(ArrayList<Integer> indexes){
     ArrayList<Card> removed = new ArrayList<Card>(indexes.size());
     for (int i = indexes.size() - 1; i >= 0; i--) {
