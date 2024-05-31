@@ -98,7 +98,7 @@ public class Hand {
 
   // }
 
-  public static boolean isPossibleSet(ArrayList<Card> set) {
+  public boolean isPossibleSet(ArrayList<Card> set) { //static
     // assumes set given is of valid lengths 1, 2, 5
     // 1
     if (set.size() == 0) {

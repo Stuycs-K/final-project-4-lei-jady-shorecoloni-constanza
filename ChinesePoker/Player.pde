@@ -24,7 +24,7 @@ public class Player {
   }
 
   public boolean play() {
-    if (Hand.isPossibleSet(selectedHand.getHand())) {
+    if (selectedHand.isPossibleSet(selectedHand.getHand())) {
    //   println(""+selectedHand.getHand());
       for (Card c : selectedHand.getHand()) {
         System.out.println(c.getName());
