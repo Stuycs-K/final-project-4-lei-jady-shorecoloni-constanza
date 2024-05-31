@@ -101,24 +101,28 @@ public class Game{
     for(int i = 0; i < 13; i++){
       cards.add(deck.getCard(i));
     }
+	cards.sort();
     players.add(new Player("You", new Hand(cards)));
     
     cards = new ArrayList<Card>(13);
     for(int i = 13; i< 26; i++){
       cards.add(deck.getCard(i));
     }
+	cards.sort();
     players.add(new Player("Opponent 1", new Hand(cards)));
     
     cards = new ArrayList<Card>(13);
     for(int i = 26; i< 39; i++){
       cards.add(deck.getCard(i));
     }
+	cards.sort();
     players.add(new Player("Opponent 2", new Hand(cards)));
     
     cards = new ArrayList<Card>(13);
     for(int i = 39; i< 52; i++){
       cards.add(deck.getCard(i));
     }
+	cards.sort();
     players.add(new Player("Opponent 3", new Hand(cards)));
   }
 
