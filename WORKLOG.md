@@ -30,6 +30,8 @@ work on/tried (but did not succeed) to make 'play' button and mouseClicked(), st
 
 Wrote mouseClicked() and keyPressed() - when cards are selected, they move up and when return/enter is pressed (plays selected hand), the cards are removed from hand
 Got images of cards to work (replaced rectangles), added picture of the back of the card for opponents' cards and deck
+Actually when return/enter is pressed the selected hand is not removed, but the cards at the end of the deck are
+
 
 ### May 31, 2024
 
