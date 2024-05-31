@@ -61,3 +61,9 @@ Working on fixing functions in Hand.
 - got possibleSets to actually return proper sets and trimmed down the amount of sets it returned. (still needs work)
 - wrote and which means hopefully finished the strength functions as they seem to work properly on the sets that were properly returned.
 - Prev means I also wrote the boolean functions to test for each individual set.
+
+### May 30, 2024
+
+- Another day, another chance to stare at possibleSets and cry.
+- started working on the game loop in the java files using the Game and Player classes so there's less clutter in the pde.
+  - wrote play function for Player and tossed out idea of making the for loop in a game class. replaced with better accessors that can be called by the processing sketch.
