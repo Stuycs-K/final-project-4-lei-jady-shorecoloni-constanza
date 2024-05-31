@@ -12,7 +12,7 @@ void setup(){
   images = new ArrayList<PImage>(52);
   for(int i = 0; i < 4; i++){
     for(int j = 0; j < 13; j++){
-      images.add(loadImage(game.getPlayer(i).getDeck().getCard(j).cardimage()));
+ //     images.add(loadImage(game.getPlayer(i).getDeck().getCard(j).cardimage()));
     }
   }
   images.add(loadImage("Images/back.png"));
@@ -61,7 +61,9 @@ void keyPressed(){
       if(!started){
         started = true;
       }
-      game.getPlayer(0).play();
+      if(game.getPlayer(0).play()){
+        
+      }
       redraw();
     }
  // }
