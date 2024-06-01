@@ -21,13 +21,12 @@ public class Game{
     }
     else{
       //play (bottom)
-      Player display = players.get(0);
-      for(int i = 0; i < 13; i++){
-        if(!(display.getDeck().getCard(i).isSelected())){
-          image(display.getDeck().getCard(i).getImage(), width/3 - 50 + (i*40), height - 150, 100, 140*(337/240));
+      for(int i = 0; i < getPlayer(0).getDeck().size(); i++){
+        if(!(getPlayer(0).getDeck().getCard(i).isSelected())){
+          image(getPlayer(0).getDeck().getCard(i).getImage(), width/3 - 50 + (i*40), height - 150, 100, 140*(337/240));
          }
         else{
-         image(display.getDeck().getCard(i).getImage(), width/3 - 50 + (i*40), height - 210, 100, 140*(337/240));
+         image(getPlayer(0).getDeck().getCard(i).getImage(), width/3 - 50 + (i*40), height - 210, 100, 140*(337/240));
         }
       }
       textSize(20);
