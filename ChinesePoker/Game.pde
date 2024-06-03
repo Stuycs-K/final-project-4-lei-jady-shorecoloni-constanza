@@ -2,7 +2,7 @@ import java.util.*;
 
 public class Game{
   ArrayList<Player> players;
-  public Hand deck;
+   Hand deck;
   private int activePlayer;
   boolean started;
   Card back = new Card("back", 0, "");
@@ -50,7 +50,7 @@ public class Game{
       
       //cards on table
       for(int i = 0; i < currentHand.size(); i++){
-        image(currentHand.getCard(i).getImage(), width/3 - 5- + (i*100), height/2, 100, 140*(337/240));
+        image(currentHand.getCard(i).getImage(), width/3 - 5 + (i*100), height/2, 100, 140*(337/240));
       }
     }
   }
@@ -151,9 +151,10 @@ public class Game{
       }
       currentHand = best;
       for (Card c : best.getHand()) {
-        System.out.println(c.getName());
-        deck.removeCard(c);
+       // System.out.println(c.getName());
+        player.getDeck().removeCard(c);
       }
+      game.progressGame();
     return true;
     }
     return false;

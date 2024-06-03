@@ -10,13 +10,18 @@ void setup(){
  }
 
 void draw(){
-  background(204);
-  game.displayCards();
-  
-  if(!game.getActivePlayer().equals(game.getPlayer(0))){
-    game.play(game.getActivePlayer());
+  if(frameCount % 70 == 0 && !game.end()){  
+    background(204);
+    game.displayCards();
+    
+    if(!game.getActivePlayer().equals(game.getPlayer(0))){
+      game.play(game.getActivePlayer());
+    }
   }
-
+  if(game.end()){
+    background(0);
+    text("GAME OVER", width/2, height/2);
+  }
 }
 
 void mouseClicked(){
@@ -39,11 +44,12 @@ void keyPressed(){
       if(!game.isStarted()){
         game.started();
       }
-      Hand sel = game.getPlayer(0).getSelectedHand();
-      if(game.getPlayer(0).play()){
-        game.setCurrHand(sel);
-        game.progressGame();
+      if(game.getActivePlayer().equals(game.getPlayer(0))){
+        Hand sel = game.getPlayer(0).getSelectedHand();
+        if(game.getPlayer(0).play()){
+          game.setCurrHand(sel);
+          game.progressGame();
+        }
       }
-      redraw();
     }
 }
