@@ -5,6 +5,7 @@ public class Game{
   public Hand deck;
   public Hand prevSet;
   private int activePlayer;
+  private int currentTurnNum;
   boolean started;
   Card back = new Card("back", 0, "");
 
@@ -48,6 +49,11 @@ public class Game{
         image(back.getImage(), width/3 - 50 + (i*40), 50, 100, 140*(337/240));
       }
       text(getPlayer(2).getName(), width/3 - 50 + (6*40), 30);
+      
+      // center
+      for (int i = 0; i < prevSet.size(); i++) {
+        image(prevSet.getCard(i).getImage(), width / 2 - (i * 20), height / 2, 100, 140*(337/240));
+      }
     }
   }
   
@@ -107,14 +113,13 @@ public class Game{
   public void start(){
     shuffleDeck();
     deal();
-    int active = 0;
     Card diamond3 = new Card("diamond3", 1, "diamond");
     if (players.get(1).getDeck().getHand().contains(diamond3)) {
-      active = 1;
+      activePlayer = 1;
     } else if (players.get(2).getDeck().getHand().contains(diamond3)) {
-      active = 2;
+      activePlayer = 2;
     } else if (players.get(3).getDeck().getHand().contains(diamond3)) {
-      active = 3;
+      activePlayer = 3;
     }
   }
   
@@ -127,7 +132,7 @@ public class Game{
   
   public void progressGame() {
     if (activePlayer != 0) {
-      // write code for opponents
+      // write code for opponents using possibleSets
     }
     prevSet = players.get(activePlayer).getSelectedHand();
     players.get(activePlayer).play();
