@@ -30,9 +30,9 @@ public class Player {
         System.out.println(c.getName());
         deck.removeCard(c);
       }
+      selectedHand.getHand().clear();
       return true;
     }
-    selectedHand.getHand().clear();
     return false;
   }
 

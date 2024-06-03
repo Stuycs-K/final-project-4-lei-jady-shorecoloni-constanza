@@ -6,6 +6,7 @@ public class Game{
   private int activePlayer;
   boolean started;
   Card back = new Card("back", 0, "");
+  Hand currentHand;
 
   public Game(){
     this.players = new ArrayList<Player>(4);
@@ -46,6 +47,11 @@ public class Game{
         image(back.getImage(), width/3 - 50 + (i*40), 50, 100, 140*(337/240));
       }
       text(getPlayer(2).getName(), width/3 - 50 + (6*40), 30);
+      
+      //cards on table
+      for(int i = 0; i < currentHand.size(); i++){
+        image(currentHand.getCard(i).getImage(), width/3 - 5- + (i*100), height/2, 100, 140*(337/240));
+      }
     }
   }
   
@@ -130,8 +136,28 @@ public class Game{
   public Player getActivePlayer() {
   return players.get(activePlayer);
   }
-
-
+  
+  public void setCurrHand(Hand hand){
+    currentHand = hand;
+  }
+  public boolean play(Player player){
+    ArrayList<Hand> sets = (player.getDeck()).possibleSets(player.getDeck().getHand());
+    if(sets.size() > 0){
+      Hand best = sets.get(0);
+      for(int i = 0; i < sets.size();i++){
+        if(sets.get(i).deckStrength() > best.deckStrength()){
+          best = sets.get(i);
+        }
+      }
+      currentHand = best;
+      for (Card c : best.getHand()) {
+        System.out.println(c.getName());
+        deck.removeCard(c);
+      }
+    return true;
+    }
+    return false;
+}
   public void deal(){
     ArrayList<Card> cards = new ArrayList<Card>(13);
     for(int i = 0; i < 13; i++){
