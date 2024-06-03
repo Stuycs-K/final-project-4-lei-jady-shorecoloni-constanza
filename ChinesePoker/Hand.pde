@@ -206,7 +206,8 @@ public class Hand {
   //  }
   //  return all;
   //}
-  public ArrayList<Hand> possibleSets(ArrayList<Card> cardsRemaining, int num) {
+  public ArrayList<Hand> possibleSets(int num) {
+    ArrayList<Card> cardsRemaining = this.getHand();
     if (cardsRemaining.size() > num) {
       return possibleSets(0, new ArrayList<Hand>(), num, new Hand(), cardsRemaining);
     } else {

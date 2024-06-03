@@ -133,11 +133,24 @@ public class Game{
   public void progressGame() {
     if (activePlayer != 0) {
       // write code for opponents using possibleSets
+      int i = 0;
+      itn prevSetStrength = prevSet.getStrength();
+      ArrayList<Hand> hs = players.get(activePlayer).getSelectedHand().possibleSets(currentTurnNum);
+      while (i < hs.size() && players.get(activePlayer).getSelectedHand().size() != 0) {
+        if (hs.get(i).getStrength > ) {
+          
+        }
+        i++;
+      }
     }
     prevSet = players.get(activePlayer).getSelectedHand();
     players.get(activePlayer).play();
+    if (prevSet.size() != 0) {
+        currentTurnNum = prevSet.size();
+    }
     activePlayer ++;
     activePlayer %= 4;
+    delay(2000);
   }
   
   
