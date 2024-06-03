@@ -3,6 +3,7 @@ import java.util.*;
 public class Game{
   ArrayList<Player> players;
   public Hand deck;
+  public Hand prevSet;
   private int activePlayer;
   boolean started;
   Card back = new Card("back", 0, "");
@@ -135,6 +136,9 @@ public class Game{
   
   public Player getActivePlayer() {
     return players.get(activePlayer);
+  }
+  public int getActivePlayerIndex() {
+    return activePlayer;
   }
 
 
