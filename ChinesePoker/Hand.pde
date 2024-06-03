@@ -183,28 +183,35 @@ public class Hand {
     return sets;
   }
 
-  public ArrayList<Hand> possibleSets(ArrayList<Card> cardsRemaining) {
-    ArrayList<Hand> all = new ArrayList<Hand>();
-    ArrayList<Hand> singles = possibleSets(0, new ArrayList<Hand>(), 1, new Hand(), cardsRemaining);
-    // System.out.println(singles.toString());
-    for (Hand h : singles) {
-      all.add(h);
+  //public ArrayList<Hand> possibleSets(ArrayList<Card> cardsRemaining) {
+  //  ArrayList<Hand> all = new ArrayList<Hand>();
+  //  ArrayList<Hand> singles = possibleSets(0, new ArrayList<Hand>(), 1, new Hand(), cardsRemaining);
+  //  // System.out.println(singles.toString());
+  //  for (Hand h : singles) {
+  //    all.add(h);
+  //  }
+  //  if (cardsRemaining.size() >= 2) {
+  //    ArrayList<Hand> doubles = possibleSets(0, new ArrayList<Hand>(), 2, new Hand(), cardsRemaining);
+  //    // System.out.println(doubles.toString());
+  //    for (Hand h : doubles) {
+  //    all.add(h);
+  //    }
+  //  }
+  //  if (cardsRemaining.size() >= 5) {
+  //    ArrayList<Hand> sets = possibleSets(0, new ArrayList<Hand>(), 5, new Hand(), cardsRemaining);
+  //    // System.out.println(sets.toString());
+  //    for (Hand h : sets) {
+  //      all.add(h);
+  //    }
+  //  }
+  //  return all;
+  //}
+  public ArrayList<Hand> possibleSets(ArrayList<Card> cardsRemaining, int num) {
+    if (cardsRemaining.size() > num) {
+      return possibleSets(0, new ArrayList<Hand>(), num, new Hand(), cardsRemaining);
+    } else {
+      return new ArrayList<Hand>();
     }
-    if (cardsRemaining.size() >= 2) {
-      ArrayList<Hand> doubles = possibleSets(0, new ArrayList<Hand>(), 2, new Hand(), cardsRemaining);
-      // System.out.println(doubles.toString());
-      for (Hand h : doubles) {
-      all.add(h);
-      }
-    }
-    if (cardsRemaining.size() >= 5) {
-      ArrayList<Hand> sets = possibleSets(0, new ArrayList<Hand>(), 5, new Hand(), cardsRemaining);
-      // System.out.println(sets.toString());
-      for (Hand h : sets) {
-        all.add(h);
-      }
-    }
-    return all;
   }
 
   //public static void main(String[] args) {
