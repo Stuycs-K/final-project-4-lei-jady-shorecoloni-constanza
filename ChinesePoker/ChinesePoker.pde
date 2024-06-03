@@ -10,9 +10,9 @@ void setup(){
  }
 
 void draw(){
-  background(204);
+  background(#000000);
   game.displayCards();
-  
+  text(game.getActivePlayerIndex(),10,10);
 
 }
 
@@ -36,10 +36,18 @@ void keyPressed(){
     if(key == ENTER || key == RETURN){
       if(!game.isStarted()){
         game.started();
+      } else {
+        if (game.getActivePlayerIndex() == 0) {
+          if (game.getActivePlayer().getSelectedHand().isPossibleSet()) {
+            game.progressGame();
+          }
+        } else {
+          game.progressGame();
+        }
       }
-      if(game.getPlayer(0).play()){
+      //if(game.getPlayer(0).play()){
         
-      }
+      //}
       redraw();
     }
  // }
