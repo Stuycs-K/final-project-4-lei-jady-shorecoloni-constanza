@@ -23,7 +23,7 @@ void draw(){
   }
   if(game.end()){
     background(0);
-    text("GAME OVER", width/2, height/2);
+    text("GAME OVER\n" + game.getPlayer(game.getActivePlayerIndex() - 1).getName() + " wins", width/2, height/2);
   }
 }
 

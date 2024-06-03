@@ -53,8 +53,8 @@ public class Game{
       
       //cards on table
       for(int i = 0; i < prevSet.size(); i++){
-        image(prevSet.getCard(i).getImage(), width/3 - 5 + (i*100), height/2, 100, 140*(337/240));
-    //    image(prevSet.getCard(i).getImage(), width / 2 - (i * 20), height / 2, 100, 140*(337/240));
+  //      image(prevSet.getCard(i).getImage(), width/3 - 5 + (i*100), height/2, 100, 140*(337/240));
+        image(prevSet.getCard(i).getImage(), width / 2 - (i * 20), height / 2, 100, 140*(337/240));
       }
     }
   }
@@ -161,7 +161,10 @@ public class Game{
       sets = (player.getDeck()).possibleSets(player.getDeck().getHand(), prevSet.size());
     }
     else{*/
-      sets = (player.getDeck()).possibleSets(player.getDeck().getHand()/*, 1*/);
+      sets = new ArrayList<Hand>();//(player.getDeck()).possibleSets(player.getDeck().getHand()/*, 1*/);
+      Hand hand = new Hand();
+      hand.addCard(player.getDeck().getCard(0));
+      sets.add(hand);
 //    }
     if(sets.size() > 0){
       Hand best = sets.get(0);
