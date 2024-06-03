@@ -43,5 +43,9 @@ public class Card implements Comparable<Card>{
     return strength - other.getStrength();
   }
 
-  
+  @Override
+  public boolean equals(Object o) {
+    Card other = (Card) o;
+    return (strength == other.getStrength());
+  }
 }

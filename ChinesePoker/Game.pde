@@ -2,17 +2,20 @@ import java.util.*;
 
 public class Game{
   ArrayList<Player> players;
-   Hand deck;
+
+  public Hand deck;
+  public Hand prevSet;
   private int activePlayer;
+  private int currentTurnNum;
   boolean started;
   Card back = new Card("back", 0, "");
-  Hand currentHand;
 
   public Game(){
     this.players = new ArrayList<Player>(4);
     deck = new Hand();
+    prevSet = new Hand();
     deck.addCards(createDeck());
-    activePlayer = 0;
+  //  activePlayer = 0;
     started = false;
   }
   
@@ -49,8 +52,9 @@ public class Game{
       text(getPlayer(2).getName(), width/3 - 50 + (6*40), 30);
       
       //cards on table
-      for(int i = 0; i < currentHand.size(); i++){
-        image(currentHand.getCard(i).getImage(), width/3 - 5 + (i*100), height/2, 100, 140*(337/240));
+      for(int i = 0; i < prevSet.size(); i++){
+        image(prevSet.getCard(i).getImage(), width/3 - 5 + (i*100), height/2, 100, 140*(337/240));
+    //    image(prevSet.getCard(i).getImage(), width / 2 - (i * 20), height / 2, 100, 140*(337/240));
       }
     }
   }
@@ -111,14 +115,13 @@ public class Game{
   public void start(){
     shuffleDeck();
     deal();
-    int active = 0;
     Card diamond3 = new Card("diamond3", 1, "diamond");
     if (players.get(1).getDeck().getHand().contains(diamond3)) {
-      active = 1;
+      activePlayer = 1;
     } else if (players.get(2).getDeck().getHand().contains(diamond3)) {
-      active = 2;
+      activePlayer = 2;
     } else if (players.get(3).getDeck().getHand().contains(diamond3)) {
-      active = 3;
+      activePlayer = 3;
     }
   }
   
@@ -130,18 +133,36 @@ public class Game{
   }
   
   public void progressGame() {
-  activePlayer ++;
-  activePlayer %= 4;
+  /*
+    if (activePlayer != 0) {
+       write code for opponents using possibleSets
+    }
+    prevSet = players.get(activePlayer).getSelectedHand();
+    players.get(activePlayer).play();
+    */
+    activePlayer ++;
+    activePlayer %= 4;
   }
+  
+  
   public Player getActivePlayer() {
-  return players.get(activePlayer);
+    return players.get(activePlayer);
+  }
+  public int getActivePlayerIndex() {
+    return activePlayer;
   }
   
   public void setCurrHand(Hand hand){
-    currentHand = hand;
+    prevSet = hand;
   }
   public boolean play(Player player){
-    ArrayList<Hand> sets = (player.getDeck()).possibleSets(player.getDeck().getHand());
+    ArrayList<Hand> sets;
+ /*   if(prevSet.size()>0){
+      sets = (player.getDeck()).possibleSets(player.getDeck().getHand(), prevSet.size());
+    }
+    else{*/
+      sets = (player.getDeck()).possibleSets(player.getDeck().getHand()/*, 1*/);
+//    }
     if(sets.size() > 0){
       Hand best = sets.get(0);
       for(int i = 0; i < sets.size();i++){
@@ -149,7 +170,7 @@ public class Game{
           best = sets.get(i);
         }
       }
-      currentHand = best;
+      prevSet = best;
       for (Card c : best.getHand()) {
        // System.out.println(c.getName());
         player.getDeck().removeCard(c);

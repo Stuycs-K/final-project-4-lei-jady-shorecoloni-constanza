@@ -14,6 +14,9 @@ void draw(){
     background(204);
     game.displayCards();
     
+      text(game.getActivePlayerIndex(),10,10);
+
+    
     if(!game.getActivePlayer().equals(game.getPlayer(0))){
       game.play(game.getActivePlayer());
     }
@@ -43,7 +46,10 @@ void keyPressed(){
     if(key == ENTER || key == RETURN){
       if(!game.isStarted()){
         game.started();
-      }
+      } //else {
+
+     // }
+
       if(game.getActivePlayer().equals(game.getPlayer(0))){
         Hand sel = game.getPlayer(0).getSelectedHand();
         if(game.getPlayer(0).play()){
@@ -51,5 +57,6 @@ void keyPressed(){
           game.progressGame();
         }
       }
+
     }
 }
