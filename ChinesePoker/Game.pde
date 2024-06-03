@@ -11,6 +11,7 @@ public class Game{
   public Game(){
     this.players = new ArrayList<Player>(4);
     deck = new Hand();
+    prevSet = new Hand();
     deck.addCards(createDeck());
     activePlayer = 0;
     started = false;
@@ -128,6 +129,7 @@ public class Game{
     if (activePlayer != 0) {
       // write code for opponents
     }
+    prevSet = players.get(activePlayer).getSelectedHand();
     players.get(activePlayer).play();
     activePlayer ++;
     activePlayer %= 4;
