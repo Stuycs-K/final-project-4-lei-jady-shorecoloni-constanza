@@ -36,10 +36,12 @@ void keyPressed(){
     if(key == ENTER || key == RETURN){
       if(!game.isStarted()){
         game.started();
+      } else {
+        game.progressGame();
       }
-      if(game.getPlayer(0).play()){
+      //if(game.getPlayer(0).play()){
         
-      }
+      //}
       redraw();
     }
  // }

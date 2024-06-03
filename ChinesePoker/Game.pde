@@ -124,11 +124,17 @@ public class Game{
   }
   
   public void progressGame() {
-  activePlayer ++;
-  activePlayer %= 4;
+    if (activePlayer != 0) {
+      // write code for opponents
+    }
+    players.get(activePlayer).play();
+    activePlayer ++;
+    activePlayer %= 4;
   }
+  
+  
   public Player getActivePlayer() {
-  return players.get(activePlayer);
+    return players.get(activePlayer);
   }
 
 
