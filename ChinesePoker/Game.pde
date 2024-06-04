@@ -20,7 +20,7 @@ public class Game{
   
   public void displayCards(){
     if(!started){
-      image((new Card("back", 0, "").getImage()), width/2, height/2, 100, 140*(337/240));
+      image((new Card("back", 0, "").getImage()), width/2-50, height/2-98, 100, 140*(337/240));
     }
     else{
       //play (bottom)
