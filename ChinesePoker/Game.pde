@@ -134,11 +134,11 @@ public class Game{
     if (activePlayer != 0) {
       // write code for opponents using possibleSets
       int i = 0;
-      itn prevSetStrength = prevSet.getStrength();
+      int prevSetStrength = prevSet.deckStrength();
       ArrayList<Hand> hs = players.get(activePlayer).getSelectedHand().possibleSets(currentTurnNum);
       while (i < hs.size() && players.get(activePlayer).getSelectedHand().size() != 0) {
-        if (hs.get(i).getStrength > ) {
-          
+        if (hs.get(i).deckStrength() > prevSetStrength) {
+          players.get(activePlayer).setSelectedHand(hs.get(i));
         }
         i++;
       }
@@ -150,7 +150,7 @@ public class Game{
     }
     activePlayer ++;
     activePlayer %= 4;
-    delay(2000);
+    //delay(2000);
   }
   
   
