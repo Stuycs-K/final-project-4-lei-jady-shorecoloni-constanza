@@ -40,7 +40,25 @@ public class Card implements Comparable<Card>{
   // hopefully can be used by a sort method to ort the cards.
   @Override
   public int compareTo(Card other){
-    return strength - other.getStrength();
+    int thisStrength = strength;
+    int otherStrength = other.getStrength();
+    if (thisStrength == otherStrength) {
+      if (suit.equals("clover")) {
+        thisStrength *= 2;
+      } else if (suit.equals("heart")) {
+        thisStrength *= 3;
+      } else if (suit.equals("spade")) {
+        thisStrength *= 4;
+      }
+      if (other.getSuit().equals("clover")) {
+        otherStrength *= 2;
+      } else if (other.getSuit().equals("heart")) {
+        otherStrength *= 3;
+      } else if (other.getSuit().equals("spade")) {
+        otherStrength *= 4;
+      }
+    }
+    return thisStrength - otherStrength;
   }
 
   @Override
