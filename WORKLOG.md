@@ -32,9 +32,17 @@ Wrote mouseClicked() and keyPressed() - when cards are selected, they move up an
 Got images of cards to work (replaced rectangles), added picture of the back of the card for opponents' cards and deck
 Actually when return/enter is pressed the selected hand is not removed, but the cards at the end of the deck are
 
-
 ### May 31, 2024
 
+Changed all java files to pde, got image display to work (each card has PImage variable)
+
+### June 1 & 2, 2024
+
+added display method to game class to display everyone's hands, and cards on the table. Draw runs every 70 frames to make game visible
+
+### June 3 (&4), 2024
+
+worked on allowing players to pass and restarting round when everyone passes
 
 
 ## Jady Lei
