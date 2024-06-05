@@ -13,9 +13,8 @@ void draw(){
   if(frameCount % 70 == 0 && !game.end()){  
     background(204);
     game.displayCards();
-    
-      text(game.getActivePlayerIndex(),10,10);
-
+  
+    text(game.getActivePlayerIndex(),10,10);
     
     if(!game.getActivePlayer().equals(game.getPlayer(0))){
       game.play(game.getActivePlayer());
@@ -52,9 +51,12 @@ void keyPressed(){
 
       if(game.getActivePlayer().equals(game.getPlayer(0))){
         Hand sel = game.getPlayer(0).getSelectedHand();
+        if(sel.size() == 0)
+          game.pass();
         if(game.getPlayer(0).play()){
           game.setCurrHand(sel);
           game.progressGame();
+        //  println(game.getPrevSet());
         }
       }
 

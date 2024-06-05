@@ -6,9 +6,10 @@ public class Game{
   public Hand deck;
   public Hand prevSet;
   private int activePlayer;
-  private int currentTurnNum;
+//  private int currentTurnNum;
   boolean started;
   Card back = new Card("back", 0, "");
+  int pass;
 
   public Game(){
     this.players = new ArrayList<Player>(4);
@@ -57,6 +58,10 @@ public class Game{
         image(prevSet.getCard(i).getImage(), width / 2 - (i * 20), height / 2, 100, 140*(337/240));
       }
     }
+  }
+  
+  public Hand getPrevSet(){
+    return prevSet;
   }
   
   public Player getPlayer(int index){
@@ -178,11 +183,19 @@ public class Game{
        // System.out.println(c.getName());
         player.getDeck().removeCard(c);
       }
-      game.progressGame();
+      progressGame();
     return true;
     }
+    pass();
     return false;
-}
+  }
+  
+  public void pass(){
+    pass++;
+    if(pass == 3){
+      prevSet = new Hand();
+    }
+  }
   public void deal(){
     ArrayList<Card> cards = new ArrayList<Card>(13);
     for(int i = 0; i < 13; i++){
