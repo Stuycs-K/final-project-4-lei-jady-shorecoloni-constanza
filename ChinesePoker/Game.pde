@@ -54,7 +54,7 @@ public class Game{
       
       //cards on table
       for(int i = 0; i < prevSet.size(); i++){
-  //      image(prevSet.getCard(i).getImage(), width/3 - 5 + (i*100), height/2, 100, 140*(337/240));
+   //     image(prevSet.getCard(i).getImage(), width/3 - 5 + (i*100), height/2, 100, 140*(337/240));
         image(prevSet.getCard(i).getImage(), width / 2 - (i * 20), height / 2, 100, 140*(337/240));
       }
     }
@@ -161,20 +161,28 @@ public class Game{
     prevSet = hand;
   }
   public boolean play(Player player){
-    ArrayList<Hand> sets;
- /*   if(prevSet.size()>0){
-      sets = (player.getDeck()).possibleSets(player.getDeck().getHand(), prevSet.size());
-    }
-    else{*/
-      sets = new ArrayList<Hand>();//(player.getDeck()).possibleSets(player.getDeck().getHand()/*, 1*/);
-      Hand hand = new Hand();
-      hand.addCard(player.getDeck().getCard(0));
-      sets.add(hand);
-//    }
+    ArrayList<Hand> sets = new ArrayList<Hand>();
+   if(prevSet.size() > 0){
+     sets = (player.getDeck()).possibleSets(prevSet.size());
+   }
+   ArrayList<Hand> possible = (player.getDeck()).possibleSets(1);
+   for(Hand possibility: possible){
+     sets.add(possibility);
+   }
+
+   possible = (player.getDeck()).possibleSets(2);
+   for(Hand possibility: possible){
+     sets.add(possibility);
+   }
+   possible = (player.getDeck()).possibleSets(5);
+   for(Hand possibility: possible){
+     sets.add(possibility);
+   }
+
     if(sets.size() > 0){
-      Hand best = sets.get(0);
+      Hand best = new Hand();//sets.get(0);
       for(int i = 0; i < sets.size();i++){
-        if(sets.get(i).deckStrength() > best.deckStrength()){
+        if(sets.get(i).deckStrength() > best.deckStrength() && (sets.get(i).size() == prevSet.size() || prevSet.size() == 0)){
           best = sets.get(i);
         }
       }

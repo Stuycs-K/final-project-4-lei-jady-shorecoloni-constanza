@@ -23,8 +23,8 @@ public class Player {
     return selectedHand;
   }
 
-  public boolean play() {
-    if (selectedHand.isPossibleSet()) {
+  public boolean play(int prevSize) {
+    if (selectedHand.isPossibleSet() && selectedHand.size() == prevSize) {
    //   println(""+selectedHand.getHand());
       for (Card c : selectedHand.getHand()) {
         System.out.println(c.getName());

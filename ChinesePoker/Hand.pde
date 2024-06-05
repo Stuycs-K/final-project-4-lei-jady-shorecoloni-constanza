@@ -78,26 +78,6 @@ public class Hand {
     return result + "]";
   }
 
-  // public static void main(String[] args){
-  // Hand test = new Hand();
-  // test.addCard(new Card("", 1, ""));
-  // ArrayList<Card> toAdd = new ArrayList<Card>();
-  // toAdd.add(new Card("", 1, ""));
-  // toAdd.add(new Card("", 2, ""));
-  // test.addCards(toAdd);
-  // System.out.println(test.toString());
-
-  // ArrayList<Integer> indexes = new ArrayList<Integer>();
-  // indexes.add(2);
-  // indexes.add(1);
-  // indexes.add(0);
-
-  // test.removeCards(indexes);
-
-  // System.out.println(test.toString());
-
-  // }
-
   public boolean isPossibleSet() { //static
     // assumes set given is of valid lengths 1, 2, 5
     // 1
@@ -145,91 +125,30 @@ public class Hand {
   }
 
   public ArrayList<Hand> possibleSets(int i, ArrayList<Hand> sets, int size, Hand partial, ArrayList<Card> cardsRemaining) {
-    // if (size > cardsRemaining.size()) {
-    // return sets;
-    // }
-    if ( size <= 0 || cardsRemaining.size() == 0) {
-      // print testing
-          System.out.print("[");
-          for (Card c : partial.getHand()) {
-          System.out.print(c.getStrength());
-          System.out.print(", ");
-          }
-          System.out.println("]");
-      // end of print testing
-
-      if (partial.isPossibleSet() && partial.size() > 0) {
-                      // System.out.print("[");
-                      // for (Card c : partial) {
-                      //   System.out.print(c.getStrength());
-                      //   System.out.print(", ");
-                      // }
-                      // System.out.println("]");
-
-        sets.add(partial);
+    if ( size <= 0 ) {
+      if (partial.isPossibleSet()) {
+        sets.add(new Hand(partial.getHand()));
       }
     } else {
       cardsRemaining.sort(null);
       for (int j = i; j < cardsRemaining.size(); j++) {
         Card c = cardsRemaining.get(j);
         partial.addCard(c);
-        cardsRemaining.remove(j);
-        // ArrayList<Card> newPartial = (ArrayList<Card>)partial.clone();
-        possibleSets(i + j, sets, size-1, partial, cardsRemaining);
-        cardsRemaining.add(j, c);
+        possibleSets(j+1, sets, size-1, partial, cardsRemaining);
         partial.removeCard(c);
       }
     }
     return sets;
   }
-//should be commented out
-  public ArrayList<Hand> possibleSets(ArrayList<Card> cardsRemaining) {
-    ArrayList<Hand> all = new ArrayList<Hand>();
-    ArrayList<Hand> singles = possibleSets(0, new ArrayList<Hand>(), 1, new Hand(), cardsRemaining);
-    // System.out.println(singles.toString());
-    for (Hand h : singles) {
-      all.add(h);
-    }
-    if (cardsRemaining.size() >= 2) {
-      ArrayList<Hand> doubles = possibleSets(0, new ArrayList<Hand>(), 2, new Hand(), cardsRemaining);
-      // System.out.println(doubles.toString());
-      for (Hand h : doubles) {
-      all.add(h);
-      }
-    }
-    if (cardsRemaining.size() >= 5) {
-      ArrayList<Hand> sets = possibleSets(0, new ArrayList<Hand>(), 5, new Hand(), cardsRemaining);
-      // System.out.println(sets.toString());
-      for (Hand h : sets) {
-        all.add(h);
-      }
-    }
-    return all;
-  }
-  
-  public ArrayList<Hand> possibleSets(ArrayList<Card> cardsRemaining, int num) {
+
+  public ArrayList<Hand> possibleSets(int num) {
+    ArrayList<Card> cardsRemaining = this.getHand();
     if (cardsRemaining.size() > num) {
       return possibleSets(0, new ArrayList<Hand>(), num, new Hand(), cardsRemaining);
     } else {
       return new ArrayList<Hand>();
     }
   }
-
-  //public static void main(String[] args) {
-  //  Hand test1 = new Hand();
-  //  test1.addCard(new Card("1", 1, "diamond"));
-  //  test1.addCard(new Card("2", 2, "diamond"));
-  //  test1.addCard(new Card("2", 2, "clover"));
-  //  // test1.addCard(new Card("2", 2, "heart"));
-  //  test1.addCard(new Card("2", 2, "spade"));
-  //  test1.addCard(new Card("3", 3, "spade"));
-  //  test1.addCard(new Card("3", 3, "heart"));
-  //  ArrayList<Hand> testSets = test1.possibleSets(test1.getHand());
-  //  // for (Hand h : testSets) {
-  //  //   System.out.println(h.deckStrength());
-  //  // }
-  //  System.out.println(testSets.toString());
-  //}
 
   public int deckStrength(){
     ArrayList<Card> set = this.getHand();

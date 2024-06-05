@@ -51,9 +51,11 @@ void keyPressed(){
 
       if(game.getActivePlayer().equals(game.getPlayer(0))){
         Hand sel = game.getPlayer(0).getSelectedHand();
-        if(sel.size() == 0)
+        if(sel.size() == 0){
           game.pass();
-        if(game.getPlayer(0).play()){
+          game.progressGame();
+        }
+        if(game.getPlayer(0).play(game.getPrevSet().size())){
           game.setCurrHand(sel);
           game.progressGame();
         //  println(game.getPrevSet());
