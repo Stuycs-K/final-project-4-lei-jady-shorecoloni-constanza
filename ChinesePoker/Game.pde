@@ -22,7 +22,7 @@ public class Game{
   
   public void displayCards(){
     if(!started){
-      image((new Card("back", 0, "").getImage()), width/2, height/2, 100, 140*(337/240));
+      image((new Card("back", 0, "").getImage()), width/2-50, height/2-98, 100, 140*(337/240));
     }
     else{
       //play (bottom)
@@ -140,13 +140,33 @@ public class Game{
   public void progressGame() {
   /*
     if (activePlayer != 0) {
+<<<<<<< HEAD
        write code for opponents using possibleSets
     }
     prevSet = players.get(activePlayer).getSelectedHand();
     players.get(activePlayer).play();
     */
+=======
+      // write code for opponents using possibleSets
+      int i = 0;
+      int prevSetStrength = prevSet.deckStrength();
+      ArrayList<Hand> hs = players.get(activePlayer).getSelectedHand().possibleSets(currentTurnNum);
+      while (i < hs.size() && players.get(activePlayer).getSelectedHand().size() != 0) {
+        if (hs.get(i).deckStrength() > prevSetStrength) {
+          players.get(activePlayer).setSelectedHand(hs.get(i));
+        }
+        i++;
+      }
+    }
+    prevSet = players.get(activePlayer).getSelectedHand();
+    players.get(activePlayer).play();
+    if (prevSet.size() != 0) {
+        currentTurnNum = prevSet.size();
+    }
+>>>>>>> GameLoop
     activePlayer ++;
     activePlayer %= 4;
+    //delay(2000);
   }
   
   

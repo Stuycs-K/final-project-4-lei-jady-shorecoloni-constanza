@@ -9,9 +9,9 @@ public class Hand {
 
   public Hand(ArrayList<Card> newHand) {
     hand = new ArrayList<Card>();
-    hand = (ArrayList<Card>) newHand.clone();
-    // hand.addAll(newHand.size(), newHand);
-    // this.hand = ArrayList.addAll(hand.size(), hand);
+    for (Card c : newHand) {
+        hand.add(c);
+      }
   }
 
   public int size() {
@@ -200,10 +200,11 @@ public class Hand {
   }
 
 
-  public Hand compareStrength(Hand other){
-    if(this.deckStrength() > other.deckStrength())
-      return this;
-    return other;
+  public int compareStrength(Hand other){
+    return this.deckStrength() - other.deckStrength();
   }
 //diamond clover heart spades
+  public boolean playable(Hand other) {
+    return this.compareStrength(other) > 0 && this.size() == other.size();
+  }
 }

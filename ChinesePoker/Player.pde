@@ -22,6 +22,10 @@ public class Player {
   public Hand getSelectedHand() {
     return selectedHand;
   }
+  
+  public void setSelectedHand(Hand h) {
+    selectedHand = h;
+  }
 
   public boolean play(int prevSize) {
     if (selectedHand.isPossibleSet() && selectedHand.size() == prevSize) {
