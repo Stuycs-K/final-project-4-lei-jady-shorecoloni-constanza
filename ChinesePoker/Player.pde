@@ -28,13 +28,14 @@ public class Player {
   }
 
   public boolean play(int prevSize) {
-    if (selectedHand.isPossibleSet() && selectedHand.size() == prevSize) {
-   //   println(""+selectedHand.getHand());
-      for (Card c : selectedHand.getHand()) {
+      if (selectedHand.isPossibleSet() && (selectedHand.size() == prevSize || prevSize == 0) ) {
+
+        for (Card c : selectedHand.getHand()) {
         System.out.println(c.getName());
         deck.removeCard(c);
       }
       selectedHand.getHand().clear();
+      game.passing = false;
       return true;
     }
     return false;

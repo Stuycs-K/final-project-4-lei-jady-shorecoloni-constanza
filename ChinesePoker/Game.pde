@@ -6,10 +6,10 @@ public class Game{
   public Hand deck;
   public Hand prevSet;
   private int activePlayer;
-//  private int currentTurnNum;
   boolean started;
   Card back = new Card("back", 0, "");
   int pass;
+  public boolean passing;
 
   public Game(){
     this.players = new ArrayList<Player>(4);
@@ -18,6 +18,8 @@ public class Game{
     deck.addCards(createDeck());
   //  activePlayer = 0;
     started = false;
+    passing = false;
+    pass = 0;
   }
   
   public void displayCards(){
@@ -138,32 +140,40 @@ public class Game{
   }
   
   public void progressGame() {
-  /*
-    if (activePlayer != 0) {
-<<<<<<< HEAD
-       write code for opponents using possibleSets
-    }
-    prevSet = players.get(activePlayer).getSelectedHand();
-    players.get(activePlayer).play();
-    */
-=======
+ /*   if (activePlayer != 0) {
       // write code for opponents using possibleSets
       int i = 0;
       int prevSetStrength = prevSet.deckStrength();
-      ArrayList<Hand> hs = players.get(activePlayer).getSelectedHand().possibleSets(currentTurnNum);
+      ArrayList<Hand>hs;
+      if(prevSet.size()>0){
+        hs = players.get(activePlayer).getDeck().possibleSets(prevSet.size());
+      }else{
+        hs = new ArrayList<Hand>();
+        ArrayList<Hand> possible = (players.get(activePlayer).getDeck()).possibleSets(1);
+        for(Hand possibility: possible){
+          hs.add(possibility);
+        }
+
+        possible = (players.get(activePlayer).getDeck()).possibleSets(2);
+         for(Hand possibility: possible){
+           hs.add(possibility);
+         }
+       possible = (players.get(activePlayer).getDeck()).possibleSets(5);
+         for(Hand possibility: possible){
+           hs.add(possibility);
+         }
+      }
       while (i < hs.size() && players.get(activePlayer).getSelectedHand().size() != 0) {
-        if (hs.get(i).deckStrength() > prevSetStrength) {
+        if (hs.get(i).deckStrength() > prevSetStrength && hs.get(i).deckStrength() > players.get(activePlayer).getSelectedHand().deckStrength()) {
           players.get(activePlayer).setSelectedHand(hs.get(i));
         }
         i++;
       }
+      players.get(activePlayer).play(prevSet.size());
+
     }
-    prevSet = players.get(activePlayer).getSelectedHand();
-    players.get(activePlayer).play();
-    if (prevSet.size() != 0) {
-        currentTurnNum = prevSet.size();
-    }
->>>>>>> GameLoop
+*/
+    
     activePlayer ++;
     activePlayer %= 4;
     //delay(2000);
@@ -184,7 +194,7 @@ public class Game{
     ArrayList<Hand> sets = new ArrayList<Hand>();
    if(prevSet.size() > 0){
      sets = (player.getDeck()).possibleSets(prevSet.size());
-   }
+   }else{
    ArrayList<Hand> possible = (player.getDeck()).possibleSets(1);
    for(Hand possibility: possible){
      sets.add(possibility);
@@ -198,30 +208,45 @@ public class Game{
    for(Hand possibility: possible){
      sets.add(possibility);
    }
-
+   }
     if(sets.size() > 0){
       Hand best = new Hand();//sets.get(0);
       for(int i = 0; i < sets.size();i++){
-        if(sets.get(i).deckStrength() > best.deckStrength() && (sets.get(i).size() == prevSet.size() || prevSet.size() == 0)){
+        if(sets.get(i).deckStrength() > best.deckStrength() && sets.get(i).deckStrength() > prevSet.deckStrength() && (sets.get(i).size() == prevSet.size() || prevSet.size() == 0)){
           best = sets.get(i);
         }
       }
+      if(best.size() == 0){
+        pass();
+        progressGame();
+        return false;  
+    }
       prevSet = best;
       for (Card c : best.getHand()) {
        // System.out.println(c.getName());
         player.getDeck().removeCard(c);
       }
+      passing = false;
       progressGame();
     return true;
     }
     pass();
+    progressGame();
     return false;
   }
   
   public void pass(){
-    pass++;
+    if(passing)
+      pass++;
+    else{
+      pass = 1;
+      passing = true;
+    }
     if(pass == 3){
       prevSet = new Hand();
+      pass = 0;
+      passing = false;
+  //    play(players.get(activePlayer));
     }
   }
   public void deal(){

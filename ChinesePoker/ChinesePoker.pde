@@ -10,15 +10,15 @@ void setup(){
  }
 
 void draw(){
-  if(frameCount % 70 == 0 && !game.end()){  
+  if(/*frameCount % 70 == 0 && */!game.end()){  
     background(204);
     game.displayCards();
   
     text(game.getActivePlayerIndex(),10,10);
     
-    if(!game.getActivePlayer().equals(game.getPlayer(0))){
-      game.play(game.getActivePlayer());
-    }
+ //   if(!game.getActivePlayer().equals(game.getPlayer(0))){
+ //     game.play(game.getActivePlayer());
+ //   }
   }
   if(game.end()){
     background(0);
@@ -47,8 +47,6 @@ void keyPressed(){
         game.started();
       } //else {
 
-     // }
-
       if(game.getActivePlayer().equals(game.getPlayer(0))){
         Hand sel = game.getPlayer(0).getSelectedHand();
         if(sel.size() == 0){
@@ -60,7 +58,8 @@ void keyPressed(){
           game.progressGame();
         //  println(game.getPrevSet());
         }
+      }else{
+         game.play(game.getActivePlayer());
       }
-
     }
 }
