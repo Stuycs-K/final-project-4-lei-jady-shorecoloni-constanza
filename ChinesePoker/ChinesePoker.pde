@@ -32,23 +32,24 @@ void mouseClicked(){
 }
 
 void keyPressed(){
-  //if(key === CODED){
     if(key == ENTER || key == RETURN){
       if(!game.isStarted()){
         game.started();
-      } else {
-        if (game.getActivePlayerIndex() == 0) {
-          if (game.getActivePlayer().getSelectedHand().isPossibleSet()) {
-            game.progressGame();
-          }
-        } else {
+      } //else {
+
+      if(game.getActivePlayer().equals(game.getPlayer(0))){
+        Hand sel = game.getPlayer(0).getSelectedHand();
+        if(sel.size() == 0){
+          game.pass();
           game.progressGame();
         }
+        if(game.getPlayer(0).play(game.getPrevSet().size())){
+          game.setCurrHand(sel);
+          game.progressGame();
+        //  println(game.getPrevSet());
+        }
+      }else{
+         game.play(game.getActivePlayer());
       }
-      //if(game.getPlayer(0).play()){
-        
-      //}
-      redraw();
     }
- // }
 }

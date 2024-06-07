@@ -5,8 +5,9 @@ public class Game{
   public Hand deck;
   public Hand prevSet;
   private int activePlayer;
-  private int currentTurnNum;
-  private int passed;
+  //private int currentTurnNum;
+  private boolean passing;
+  private int pass;
   boolean started;
   Card back = new Card("back", 0, "");
 
@@ -15,8 +16,10 @@ public class Game{
     deck = new Hand();
     prevSet = new Hand();
     deck.addCards(createDeck());
-    activePlayer = 0;
+  //  activePlayer = 0;
     started = false;
+    passing = false;
+    pass = 0;
   }
   
   public void displayCards(){
@@ -57,7 +60,9 @@ public class Game{
       }
     }
   }
-  
+  public Hand getPrevSet(){
+    return prevSet;
+  }
   public Player getPlayer(int index){
     return players.get(index);
   }
@@ -132,48 +137,61 @@ public class Game{
   }
   
   public void progressGame() {
-    if (activePlayer != 0) {
-      // write code for opponents using possibleSets
-      if (currentTurnNum == 0) {
-        currentTurnNum = (int) (Math.random() * 3) + 1;
-        if (currentTurnNum == 3) {
-          currentTurnNum = 5;
-        }
-      }
-      int i = 0;
-      //int prevSetStrength = prevSet.deckStrength();
-      ArrayList<Hand> hs = players.get(activePlayer).getSelectedHand().possibleSets(currentTurnNum);
-      while (i < hs.size() && players.get(activePlayer).getSelectedHand().size() != 0) {
-        if (hs.get(i).playable(prevSet)) {
-          players.get(activePlayer).setSelectedHand(hs.get(i));
-        }
-        i++;
-      }
+  //    // write code for opponents using possibleSets
+  //    if (passed == 3) {
+  //      currentTurnNum = 0;
+  //    }
+  //    if (currentTurnNum == 0) {
+  //      currentTurnNum = (int) (Math.random() * 3) + 1;
+  //    if (currentTurnNum == 3) {
+  //      currentTurnNum = 5;
+  //    }
+  //    int i = 0;
+  //    //int prevSetStrength = prevSet.deckStrength();
+  //    ArrayList<Hand> hs = players.get(activePlayer).getSelectedHand().possibleSets(currentTurnNum);
+  //    while (i < hs.size() && players.get(activePlayer).getSelectedHand().size() != 0) {
+  //      if (hs.get(i).playable(prevSet)) {
+  //        players.get(activePlayer).setSelectedHand(hs.get(i));
+  //      }
+  //      i++;
+  //    }
+  //  }
+  //  if (players.get(activePlayer).getSelectedHand().size() == 0) {
+  //    passed ++;
+  //  } else {
+  //    prevSet = players.get(activePlayer).getSelectedHand();
+  //    players.get(activePlayer).play();
+  //    passed = 0;
+  //    currentTurnNum = prevSet.size();
+  //  }
+  //  activePlayer ++;
+  //  activePlayer %= 4;
+  //  //delay(2000);
+  //}
+  //public void progressGamePlayer() {
+  //  if (passed == 3) {
+  //    currentTurnNum = 0;
+  //    if (players.get(activePlayer).getSelectedHand().playable(prevSet)) {
+  //      prevSet = players.get(activePlayer).getSelectedHand();
+  //      players.get(activePlayer).play();
+  //      passed = 0;
+  //      activePlayer ++;
+  //      activePlayer %= 4;
+  //    }
+  //  } else {
+  //    if (players.get(activePlayer).getSelectedHand().size() == 0 || !players.get(activePlayer).getSelectedHand().playable(prevSet)) {
+  //      passed ++;
+  //    } 
+  //    if (players.get(activePlayer).getSelectedHand().playable(prevSet)) {
+  //      prevSet = players.get(activePlayer).getSelectedHand();
+  //      players.get(activePlayer).play();
+  //      passed = 0;
+  //    }
+      activePlayer ++;
+      activePlayer %= 4;
     }
-    if (players.get(activePlayer).getSelectedHand().size() == 0) {
-      passed ++;
-    } else {
-      prevSet = players.get(activePlayer).getSelectedHand();
-      players.get(activePlayer).play();
-      passed = 0;
-    }
-    activePlayer ++;
-    activePlayer %= 4;
-    //delay(2000);
-  }
-  public void progressGamePlayer() {
-    if (players.get(activePlayer).getSelectedHand().size() == 0 || !players.get(activePlayer).getSelectedHand().playable(prevSet)) {
-      passed ++;
-    } 
-    if (players.get(activePlayer).getSelectedHand().playable(prevSet)) {
-      prevSet = players.get(activePlayer).getSelectedHand();
-      players.get(activePlayer).play();
-      passed = 0;
-    }
-    activePlayer ++;
-    activePlayer %= 4;
-    //delay(2000);
-  }
+  //  //delay(2000);
+  //}
   
   
   public Player getActivePlayer() {
@@ -221,6 +239,69 @@ public class Game{
       }
     }
     return false;
+  }
+  
+    public void setCurrHand(Hand hand){
+    prevSet = hand;
+  }
+  public boolean play(Player player){
+    ArrayList<Hand> sets = new ArrayList<Hand>();
+   if(prevSet.size() > 0){
+     sets = (player.getDeck()).possibleSets(prevSet.size());
+   }else{
+   ArrayList<Hand> possible = (player.getDeck()).possibleSets(1);
+   for(Hand possibility: possible){
+     sets.add(possibility);
+   }
+
+   possible = (player.getDeck()).possibleSets(2);
+   for(Hand possibility: possible){
+     sets.add(possibility);
+   }
+   possible = (player.getDeck()).possibleSets(5);
+   for(Hand possibility: possible){
+     sets.add(possibility);
+   }
+   }
+    if(sets.size() > 0){
+      Hand best = new Hand();//sets.get(0);
+      for(int i = 0; i < sets.size();i++){
+        if(sets.get(i).deckStrength() > best.deckStrength() && sets.get(i).deckStrength() > prevSet.deckStrength() && (sets.get(i).size() == prevSet.size() || prevSet.size() == 0)){
+          best = sets.get(i);
+        }
+      }
+      if(best.size() == 0){
+        pass();
+        progressGame();
+        return false;  
+    }
+      prevSet = best;
+      for (Card c : best.getHand()) {
+       // System.out.println(c.getName());
+        player.getDeck().removeCard(c);
+      }
+      passing = false;
+      progressGame();
+    return true;
+    }
+    pass();
+    progressGame();
+    return false;
+  }
+  
+  public void pass(){
+    if(passing)
+      pass++;
+    else{
+      pass = 1;
+      passing = true;
+    }
+    if(pass == 3){
+      prevSet = new Hand();
+      pass = 0;
+      passing = false;
+  //    play(players.get(activePlayer));
+    }
   }
 /*  public static void main(String[] args){
     ArrayList<Player> people = new ArrayList<Player>();
