@@ -137,62 +137,9 @@ public class Game{
   }
   
   public void progressGame() {
-  //    // write code for opponents using possibleSets
-  //    if (passed == 3) {
-  //      currentTurnNum = 0;
-  //    }
-  //    if (currentTurnNum == 0) {
-  //      currentTurnNum = (int) (Math.random() * 3) + 1;
-  //    if (currentTurnNum == 3) {
-  //      currentTurnNum = 5;
-  //    }
-  //    int i = 0;
-  //    //int prevSetStrength = prevSet.deckStrength();
-  //    ArrayList<Hand> hs = players.get(activePlayer).getSelectedHand().possibleSets(currentTurnNum);
-  //    while (i < hs.size() && players.get(activePlayer).getSelectedHand().size() != 0) {
-  //      if (hs.get(i).playable(prevSet)) {
-  //        players.get(activePlayer).setSelectedHand(hs.get(i));
-  //      }
-  //      i++;
-  //    }
-  //  }
-  //  if (players.get(activePlayer).getSelectedHand().size() == 0) {
-  //    passed ++;
-  //  } else {
-  //    prevSet = players.get(activePlayer).getSelectedHand();
-  //    players.get(activePlayer).play();
-  //    passed = 0;
-  //    currentTurnNum = prevSet.size();
-  //  }
-  //  activePlayer ++;
-  //  activePlayer %= 4;
-  //  //delay(2000);
-  //}
-  //public void progressGamePlayer() {
-  //  if (passed == 3) {
-  //    currentTurnNum = 0;
-  //    if (players.get(activePlayer).getSelectedHand().playable(prevSet)) {
-  //      prevSet = players.get(activePlayer).getSelectedHand();
-  //      players.get(activePlayer).play();
-  //      passed = 0;
-  //      activePlayer ++;
-  //      activePlayer %= 4;
-  //    }
-  //  } else {
-  //    if (players.get(activePlayer).getSelectedHand().size() == 0 || !players.get(activePlayer).getSelectedHand().playable(prevSet)) {
-  //      passed ++;
-  //    } 
-  //    if (players.get(activePlayer).getSelectedHand().playable(prevSet)) {
-  //      prevSet = players.get(activePlayer).getSelectedHand();
-  //      players.get(activePlayer).play();
-  //      passed = 0;
-  //    }
       activePlayer ++;
       activePlayer %= 4;
     }
-  //  //delay(2000);
-  //}
-  
   
   public Player getActivePlayer() {
     return players.get(activePlayer);
@@ -281,6 +228,7 @@ public class Game{
         player.getDeck().removeCard(c);
       }
       passing = false;
+      pass = 0;
       progressGame();
     return true;
     }
@@ -300,14 +248,5 @@ public class Game{
       prevSet = new Hand();
       pass = 0;
       passing = false;
-  //    play(players.get(activePlayer));
     }
   }
-/*  public static void main(String[] args){
-    ArrayList<Player> people = new ArrayList<Player>();
-    Game test = new Game(people);
-    test.shuffleDeck();
-    System.out.println(test.toString());
-  }
-*/
-}
