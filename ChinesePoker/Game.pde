@@ -155,17 +155,20 @@ public class Game{
     } else {
       prevSet = players.get(activePlayer).getSelectedHand();
       players.get(activePlayer).play();
+      passed = 0;
     }
     activePlayer ++;
     activePlayer %= 4;
     //delay(2000);
   }
   public void progressGamePlayer() {
-    if (players.get(activePlayer).getSelectedHand().size() == 0) {
+    if (players.get(activePlayer).getSelectedHand().size() == 0 || !players.get(activePlayer).getSelectedHand().playable(prevSet)) {
       passed ++;
-    } else {
+    } 
+    if (players.get(activePlayer).getSelectedHand().playable(prevSet)) {
       prevSet = players.get(activePlayer).getSelectedHand();
       players.get(activePlayer).play();
+      passed = 0;
     }
     activePlayer ++;
     activePlayer %= 4;
