@@ -2,6 +2,7 @@ import java.util.*;
 
 public class Game{
   ArrayList<Player> players;
+
   public Hand deck;
   public Hand prevSet;
   private int activePlayer;
@@ -14,7 +15,7 @@ public class Game{
     deck = new Hand();
     prevSet = new Hand();
     deck.addCards(createDeck());
-    activePlayer = 0;
+  //  activePlayer = 0;
     started = false;
   }
   
@@ -50,8 +51,9 @@ public class Game{
       }
       text(getPlayer(2).getName(), width/3 - 50 + (6*40), 30);
       
-      // center
-      for (int i = 0; i < prevSet.size(); i++) {
+      //cards on table
+      for(int i = 0; i < prevSet.size(); i++){
+  //      image(prevSet.getCard(i).getImage(), width/3 - 5 + (i*100), height/2, 100, 140*(337/240));
         image(prevSet.getCard(i).getImage(), width / 2 - (i * 20), height / 2, 100, 140*(337/240));
       }
     }
@@ -131,6 +133,7 @@ public class Game{
   }
   
   public void progressGame() {
+  /*
     if (activePlayer != 0) {
       // write code for opponents using possibleSets
       int i = 0;
@@ -160,8 +163,38 @@ public class Game{
   public int getActivePlayerIndex() {
     return activePlayer;
   }
-
-
+  
+  public void setCurrHand(Hand hand){
+    prevSet = hand;
+  }
+  public boolean play(Player player){
+    ArrayList<Hand> sets;
+ /*   if(prevSet.size()>0){
+      sets = (player.getDeck()).possibleSets(player.getDeck().getHand(), prevSet.size());
+    }
+    else{*/
+      sets = new ArrayList<Hand>();//(player.getDeck()).possibleSets(player.getDeck().getHand()/*, 1*/);
+      Hand hand = new Hand();
+      hand.addCard(player.getDeck().getCard(0));
+      sets.add(hand);
+//    }
+    if(sets.size() > 0){
+      Hand best = sets.get(0);
+      for(int i = 0; i < sets.size();i++){
+        if(sets.get(i).deckStrength() > best.deckStrength()){
+          best = sets.get(i);
+        }
+      }
+      prevSet = best;
+      for (Card c : best.getHand()) {
+       // System.out.println(c.getName());
+        player.getDeck().removeCard(c);
+      }
+      game.progressGame();
+    return true;
+    }
+    return false;
+}
   public void deal(){
     ArrayList<Card> cards = new ArrayList<Card>(13);
     for(int i = 0; i < 13; i++){

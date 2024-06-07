@@ -32,9 +32,17 @@ Wrote mouseClicked() and keyPressed() - when cards are selected, they move up an
 Got images of cards to work (replaced rectangles), added picture of the back of the card for opponents' cards and deck
 Actually when return/enter is pressed the selected hand is not removed, but the cards at the end of the deck are
 
-
 ### May 31, 2024
 
+Changed all java files to pde, got image display to work (each card has PImage variable)
+
+### June 1 & 2, 2024
+
+added display method to game class to display everyone's hands, and cards on the table. Draw runs every 70 frames to make game visible
+
+### June 3 (&4), 2024
+
+worked on allowing players to pass and restarting round when everyone passes
 
 
 ## Jady Lei
@@ -83,3 +91,10 @@ Working on fixing functions in Hand.
 - display activePlayer and fixed the starting player.
 - draw the previously played hand at the center
 - various fixes to other functions to get the prev 2 working.
+
+### June 3, 2024
+Worked on Oponent actions
+### June 4, 2024
+Fixed some stuff in another branch and finally got possibleSets to work.
+### June 5, 2024
+Fixed compareStrength and wrote boolean playable() 
