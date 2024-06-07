@@ -200,10 +200,11 @@ public class Hand {
   }
 
 
-  public Hand compareStrength(Hand other){
-    if(this.deckStrength() > other.deckStrength())
-      return this;
-    return other;
+  public int compareStrength(Hand other){
+    return this.deckStrength() - other.deckStrength();
   }
 //diamond clover heart spades
+  public boolean playable(Hand other) {
+    return this.compareStrength(other) > 0 && this.size() == other.size();
+  }
 }

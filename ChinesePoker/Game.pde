@@ -6,7 +6,9 @@ public class Game{
   public Hand deck;
   public Hand prevSet;
   private int activePlayer;
-  private int currentTurnNum;
+  //private int currentTurnNum;
+  private boolean passing;
+  private int pass;
   boolean started;
   Card back = new Card("back", 0, "");
 
@@ -17,6 +19,8 @@ public class Game{
     deck.addCards(createDeck());
   //  activePlayer = 0;
     started = false;
+    passing = false;
+    pass = 0;
   }
   
   public void displayCards(){
@@ -58,7 +62,9 @@ public class Game{
       }
     }
   }
-  
+  public Hand getPrevSet(){
+    return prevSet;
+  }
   public Player getPlayer(int index){
     return players.get(index);
   }
@@ -133,29 +139,9 @@ public class Game{
   }
   
   public void progressGame() {
-  /*
-    if (activePlayer != 0) {
-      // write code for opponents using possibleSets
-      int i = 0;
-      int prevSetStrength = prevSet.deckStrength();
-      ArrayList<Hand> hs = players.get(activePlayer).getSelectedHand().possibleSets(currentTurnNum);
-      while (i < hs.size() && players.get(activePlayer).getSelectedHand().size() != 0) {
-        if (hs.get(i).deckStrength() > prevSetStrength) {
-          players.get(activePlayer).setSelectedHand(hs.get(i));
-        }
-        i++;
-      }
+      activePlayer ++;
+      activePlayer %= 4;
     }
-    prevSet = players.get(activePlayer).getSelectedHand();
-    players.get(activePlayer).play();
-    if (prevSet.size() != 0) {
-        currentTurnNum = prevSet.size();
-    }
-    activePlayer ++;
-    activePlayer %= 4;
-    //delay(2000);
-  }
-  
   
   public Player getActivePlayer() {
     return players.get(activePlayer);
@@ -163,38 +149,7 @@ public class Game{
   public int getActivePlayerIndex() {
     return activePlayer;
   }
-  
-  public void setCurrHand(Hand hand){
-    prevSet = hand;
-  }
-  public boolean play(Player player){
-    ArrayList<Hand> sets;
- /*   if(prevSet.size()>0){
-      sets = (player.getDeck()).possibleSets(player.getDeck().getHand(), prevSet.size());
-    }
-    else{*/
-      sets = new ArrayList<Hand>();//(player.getDeck()).possibleSets(player.getDeck().getHand()/*, 1*/);
-      Hand hand = new Hand();
-      hand.addCard(player.getDeck().getCard(0));
-      sets.add(hand);
-//    }
-    if(sets.size() > 0){
-      Hand best = sets.get(0);
-      for(int i = 0; i < sets.size();i++){
-        if(sets.get(i).deckStrength() > best.deckStrength()){
-          best = sets.get(i);
-        }
-      }
-      prevSet = best;
-      for (Card c : best.getHand()) {
-       // System.out.println(c.getName());
-        player.getDeck().removeCard(c);
-      }
-      game.progressGame();
-    return true;
-    }
-    return false;
-}
+
   public void deal(){
     ArrayList<Card> cards = new ArrayList<Card>(13);
     for(int i = 0; i < 13; i++){
@@ -233,11 +188,67 @@ public class Game{
     }
     return false;
   }
-/*  public static void main(String[] args){
-    ArrayList<Player> people = new ArrayList<Player>();
-    Game test = new Game(people);
-    test.shuffleDeck();
-    System.out.println(test.toString());
+  
+    public void setCurrHand(Hand hand){
+    prevSet = hand;
   }
-*/
+  public boolean play(Player player){
+    ArrayList<Hand> sets = new ArrayList<Hand>();
+   if(prevSet.size() > 0){
+     sets = (player.getDeck()).possibleSets(prevSet.size());
+   }else{
+   ArrayList<Hand> possible = (player.getDeck()).possibleSets(1);
+   for(Hand possibility: possible){
+     sets.add(possibility);
+   }
+
+   possible = (player.getDeck()).possibleSets(2);
+   for(Hand possibility: possible){
+     sets.add(possibility);
+   }
+   possible = (player.getDeck()).possibleSets(5);
+   for(Hand possibility: possible){
+     sets.add(possibility);
+   }
+   }
+    if(sets.size() > 0){
+      Hand best = new Hand();//sets.get(0);
+      for(int i = 0; i < sets.size();i++){
+        if(sets.get(i).deckStrength() > best.deckStrength() && sets.get(i).deckStrength() > prevSet.deckStrength() && (sets.get(i).size() == prevSet.size() || prevSet.size() == 0)){
+          best = sets.get(i);
+        }
+      }
+      if(best.size() == 0){
+        pass();
+        progressGame();
+        return false;  
+    }
+      prevSet = best;
+      for (Card c : best.getHand()) {
+       // System.out.println(c.getName());
+        player.getDeck().removeCard(c);
+      }
+      passing = false;
+      pass = 0;
+      progressGame();
+    return true;
+    }
+    pass();
+    progressGame();
+    return false;
+  }
+  
+  public void pass(){
+    if(passing)
+      pass++;
+    else{
+      pass = 1;
+      passing = true;
+    }
+    if(pass == 3){
+      prevSet = new Hand();
+      pass = 0;
+      passing = false;
+    }
+  }
 }

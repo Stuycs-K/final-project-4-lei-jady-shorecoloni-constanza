@@ -10,16 +10,14 @@ void setup(){
  }
 
 void draw(){
-  if(frameCount % 70 == 0 && !game.end()){  
+  if(!game.end()){  
     background(204);
     game.displayCards();
     
       text(game.getActivePlayerIndex(),10,10);
 
     
-    if(!game.getActivePlayer().equals(game.getPlayer(0))){
-      game.play(game.getActivePlayer());
-    }
+
   }
   if(game.end()){
     background(0);
@@ -46,16 +44,23 @@ void keyPressed(){
     if(key == ENTER || key == RETURN){
       if(!game.isStarted()){
         game.started();
-      } //else {
-
-     // }
+      } 
+       //else
 
       if(game.getActivePlayer().equals(game.getPlayer(0))){
         Hand sel = game.getPlayer(0).getSelectedHand();
-        if(game.getPlayer(0).play()){
-          game.setCurrHand(sel);
+        if(sel.size() == 0){
+          game.pass();
+
           game.progressGame();
         }
+        if(game.getPlayer(0).play(game.getPrevSet().size())){
+          game.setCurrHand(sel);
+          game.progressGame();
+        //  println(game.getPrevSet());
+        }
+      }else{
+         game.play(game.getActivePlayer());
       }
 
     }
