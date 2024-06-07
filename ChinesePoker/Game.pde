@@ -6,6 +6,7 @@ public class Game{
   public Hand prevSet;
   private int activePlayer;
   private int currentTurnNum;
+  private int passed;
   boolean started;
   Card back = new Card("back", 0, "");
 
@@ -133,20 +134,38 @@ public class Game{
   public void progressGame() {
     if (activePlayer != 0) {
       // write code for opponents using possibleSets
+      if (currentTurnNum == 0) {
+        currentTurnNum = (int) (Math.random() * 3) + 1;
+        if (currentTurnNum == 3) {
+          currentTurnNum = 5;
+        }
+      }
       int i = 0;
-      int prevSetStrength = prevSet.deckStrength();
+      //int prevSetStrength = prevSet.deckStrength();
       ArrayList<Hand> hs = players.get(activePlayer).getSelectedHand().possibleSets(currentTurnNum);
       while (i < hs.size() && players.get(activePlayer).getSelectedHand().size() != 0) {
-        if (hs.get(i).deckStrength() > prevSetStrength) {
+        if (hs.get(i).playable(prevSet)) {
           players.get(activePlayer).setSelectedHand(hs.get(i));
         }
         i++;
       }
     }
-    prevSet = players.get(activePlayer).getSelectedHand();
-    players.get(activePlayer).play();
-    if (prevSet.size() != 0) {
-        currentTurnNum = prevSet.size();
+    if (players.get(activePlayer).getSelectedHand().size() == 0) {
+      passed ++;
+    } else {
+      prevSet = players.get(activePlayer).getSelectedHand();
+      players.get(activePlayer).play();
+    }
+    activePlayer ++;
+    activePlayer %= 4;
+    //delay(2000);
+  }
+  public void progressGamePlayer() {
+    if (players.get(activePlayer).getSelectedHand().size() == 0) {
+      passed ++;
+    } else {
+      prevSet = players.get(activePlayer).getSelectedHand();
+      players.get(activePlayer).play();
     }
     activePlayer ++;
     activePlayer %= 4;
