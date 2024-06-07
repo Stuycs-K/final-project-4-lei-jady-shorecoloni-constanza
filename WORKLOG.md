@@ -78,3 +78,23 @@ Working on fixing functions in Hand.
 - Another day, another chance to stare at possibleSets and cry.
 - started working on the game loop in the java files using the Game and Player classes so there's less clutter in the pde.
   - wrote play function for Player and tossed out idea of making the for loop in a game class. replaced with better accessors that can be called by the processing sketch.
+
+### May 31, 2024
+
+- clear selectedHand when played.
+- allow for sets of 0 length
+- worked together in class to figure out one of the errors in the displayed cards.
+- got the sort working
+
+### June 2, 2024
+
+- display activePlayer and fixed the starting player.
+- draw the previously played hand at the center
+- various fixes to other functions to get the prev 2 working.
+
+### June 3, 2024
+Worked on Oponent actions
+### June 4, 2024
+Fixed some stuff in another branch and finally got possibleSets to work.
+### June 5, 2024
+Fixed compareStrength and wrote boolean playable() 
