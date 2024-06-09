@@ -8,8 +8,9 @@ public class Game{
   private int activePlayer;
   boolean started;
   Card back = new Card("back", 0, "");
-  int pass;
+  public int pass;
   public boolean passing;
+  ArrayList<Player> passed;
 
   public Game(){
     this.players = new ArrayList<Player>(4);
@@ -20,11 +21,12 @@ public class Game{
     started = false;
     passing = false;
     pass = 0;
+    passed = new ArrayList<Player>();
   }
   
-  public void displayCards(){
+  public void displayCards(boolean display){
     if(!started){
-      image((new Card("back", 0, "").getImage()), width/2-50, height/2-98, 100, 140*(337/240));
+      image((new Card("back", 0, "").getImage()), width/2 - 50, height/2 - 88, 100, 140*(337/240));
     }
     else{
       //play (bottom)
@@ -37,35 +39,78 @@ public class Game{
         }
       }
       textSize(20);
+      if(activePlayer != 0)
+        text(game.getActivePlayer().getName()+"'s turn",10,20);
+      else
+        text("Your turn", 10, 20);
+
       text(getPlayer(0).getName(), width/3 - 50 + (7*40), height - 170);
+      for(int i = 0; i < passed.size(); i++){
+        if(passed.get(i).equals(getPlayer(0)))
+          text("Passed", width/3 -50 + (13*40), height - 170);
+      }
       // right
-      for(int i = 0; i < getPlayer(3).getDeck().size(); i++){
-        image(back.getImage(), width - 220, height - 250 - (i*30), 100, 140*(337/240));
+      if(display){
+        for(int i = 0; i < getPlayer(3).getDeck().size(); i++){
+          image(getPlayer(3).getDeck().getCard(i).getImage(), width - 220, height - 250 - (i*30), 100, 140*(337/240));
+        }
+      }
+      else{
+        for(int i = 0; i < getPlayer(3).getDeck().size(); i++){
+          image(back.getImage(), width - 220, height - 250 - (i*30), 100, 140*(337/240));
+        }
       }
       text(getPlayer(3).getName(), width - 110, height - 250 - (3*30));
+      for(int i = 0; i < passed.size(); i++){
+        if(passed.get(i).equals(getPlayer(3)))
+          text("Passed", width - 110, height - 250 - (5*30));
+      }
       //left
-      for(int i = 0; i < getPlayer(1).getDeck().size(); i++){
-        image(back.getImage(), 120, height - 250 - (i*30), 100, 140*(337/240));
+      if(display){
+        for(int i = 0; i < getPlayer(1).getDeck().size(); i++){
+          image(getPlayer(1).getDeck().getCard(i).getImage(), 120, height - 250 - (i*30), 100, 140*(337/240));
+        }
+      }
+      else{  
+        for(int i = 0; i < getPlayer(1).getDeck().size(); i++){
+          image(back.getImage(), 120, height - 250 - (i*30), 100, 140*(337/240));
+        }
       }
       text(getPlayer(1).getName(), 10, height - 250 - (3*30));
+      for(int i = 0; i < passed.size(); i++){
+        if(passed.get(i).equals(getPlayer(1)))
+          text("Passed", 10, height - 250 - (5*30));
+      }
       //top
-      for(int i = 0; i < getPlayer(2).getDeck().size(); i++){
-        image(back.getImage(), width/3 - 50 + (i*40), 50, 100, 140*(337/240));
+      if(display){
+        for(int i = 0; i < getPlayer(2).getDeck().size(); i++){
+          image(getPlayer(2).getDeck().getCard(i).getImage(), width/3 - 50 + (i*40), 50, 100, 140*(337/240));
+        }
+      }
+      else{
+        for(int i = 0; i < getPlayer(2).getDeck().size(); i++){
+          image(back.getImage(), width/3 - 50 + (i*40), 50, 100, 140*(337/240));
+        }
       }
       text(getPlayer(2).getName(), width/3 - 50 + (6*40), 30);
-      
+      for(int i = 0; i < passed.size(); i++){
+        if(passed.get(i).equals(getPlayer(2)))
+          text("Passed", width/3 -50 + (13*40), 30);
+      }      
       //cards on table
       for(int i = 0; i < prevSet.size(); i++){
    //     image(prevSet.getCard(i).getImage(), width/3 - 5 + (i*100), height/2, 100, 140*(337/240));
         image(prevSet.getCard(i).getImage(), width / 2 - (i * 20), height / 2, 100, 140*(337/240));
       }
     }
+    if(passing == false)
+      passed = new ArrayList<Player>();
   }
   
   public Hand getPrevSet(){
     return prevSet;
   }
-  
+
   public Player getPlayer(int index){
     return players.get(index);
   }
@@ -140,45 +185,9 @@ public class Game{
   }
   
   public void progressGame() {
- /*   if (activePlayer != 0) {
-      // write code for opponents using possibleSets
-      int i = 0;
-      int prevSetStrength = prevSet.deckStrength();
-      ArrayList<Hand>hs;
-      if(prevSet.size()>0){
-        hs = players.get(activePlayer).getDeck().possibleSets(prevSet.size());
-      }else{
-        hs = new ArrayList<Hand>();
-        ArrayList<Hand> possible = (players.get(activePlayer).getDeck()).possibleSets(1);
-        for(Hand possibility: possible){
-          hs.add(possibility);
-        }
-
-        possible = (players.get(activePlayer).getDeck()).possibleSets(2);
-         for(Hand possibility: possible){
-           hs.add(possibility);
-         }
-       possible = (players.get(activePlayer).getDeck()).possibleSets(5);
-         for(Hand possibility: possible){
-           hs.add(possibility);
-         }
-      }
-      while (i < hs.size() && players.get(activePlayer).getSelectedHand().size() != 0) {
-        if (hs.get(i).deckStrength() > prevSetStrength && hs.get(i).deckStrength() > players.get(activePlayer).getSelectedHand().deckStrength()) {
-          players.get(activePlayer).setSelectedHand(hs.get(i));
-        }
-        i++;
-      }
-      players.get(activePlayer).play(prevSet.size());
-
-    }
-*/
-    
-    activePlayer ++;
-    activePlayer %= 4;
-    //delay(2000);
+      activePlayer ++;
+      activePlayer %= 4;
   }
-  
   
   public Player getActivePlayer() {
     return players.get(activePlayer);
@@ -235,20 +244,6 @@ public class Game{
     return false;
   }
   
-  public void pass(){
-    if(passing)
-      pass++;
-    else{
-      pass = 1;
-      passing = true;
-    }
-    if(pass == 3){
-      prevSet = new Hand();
-      pass = 0;
-      passing = false;
-  //    play(players.get(activePlayer));
-    }
-  }
   public void deal(){
     ArrayList<Card> cards = new ArrayList<Card>(13);
     for(int i = 0; i < 13; i++){
@@ -287,11 +282,25 @@ public class Game{
     }
     return false;
   }
-/*  public static void main(String[] args){
-    ArrayList<Player> people = new ArrayList<Player>();
-    Game test = new Game(people);
-    test.shuffleDeck();
-    System.out.println(test.toString());
+  
+  
+  public void pass(){
+    if(passing){
+      pass++;
+      passed.add(getActivePlayer());
+    }
+    else{
+      pass = 1;
+      passing = true;
+      passed.add(getActivePlayer());
+
+    }
+    if(pass == 3){
+      passed.add(getActivePlayer());
+      pass = 0;
+      passing = false;
+      prevSet = new Hand();
+ //     passed = new ArrayList<Player>();
+    }
   }
-*/
 }

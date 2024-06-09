@@ -27,10 +27,10 @@ public class Player {
     selectedHand = h;
   }
 
-  public boolean play(int prevSize) {
-      if (selectedHand.isPossibleSet() && (selectedHand.size() == prevSize || prevSize == 0) ) {
 
-        for (Card c : selectedHand.getHand()) {
+  public boolean play(int prevSize) {
+    if (selectedHand.isPossibleSet() && (selectedHand.size() == prevSize || prevSize == 0) ) {
+      for (Card c : selectedHand.getHand()) {
         System.out.println(c.getName());
         deck.removeCard(c);
       }
@@ -40,6 +40,7 @@ public class Player {
     }
     return false;
   }
+
 
   public void select(Card card) {
     //println(card.getStrength());
