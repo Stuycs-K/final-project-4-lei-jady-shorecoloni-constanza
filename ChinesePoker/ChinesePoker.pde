@@ -3,7 +3,6 @@ boolean display;
 
 void setup(){
   size(1350, 750);
-  
   game = new Game();
   game.start();
   display = false;
