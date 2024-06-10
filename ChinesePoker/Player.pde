@@ -28,11 +28,11 @@ public class Player {
   }
 
 
-  public boolean play(int prevSize) {
-    if (selectedHand.isPossibleSet() && (selectedHand.size() == prevSize || prevSize == 0) /*&& selectedHand.deckStrength() > prevSet.deckStrength()*/) {
+  public boolean play(Hand prevSet) {
+    if (selectedHand.playable(prevSet) && selectedHand.isPossibleSet()) {
       game.prevSet = selectedHand;
       for (Card c : selectedHand.getHand()) {
-        System.out.println(c.getName());
+      //  System.out.println(c.getName());
         deck.removeCard(c);
       }
      // selectedHand.getHand().clear();

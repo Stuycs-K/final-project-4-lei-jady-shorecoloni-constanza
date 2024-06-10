@@ -156,11 +156,11 @@ public class Hand {
     for(Card card: this.hand){
       int cardStrength = card.getStrength();
       if (card.getSuit().equals("clover")) {
-        cardStrength *= 2;
+        cardStrength += 1;
       } else if (card.getSuit().equals("heart")) {
-        cardStrength *= 3;
+        cardStrength += 2;
       } else if (card.getSuit().equals("spade")) {
-        cardStrength *= 4;
+        cardStrength += 3;
       }
       thisStrength += cardStrength;
     }
@@ -205,6 +205,9 @@ public class Hand {
   }
 //diamond clover heart spades
   public boolean playable(Hand other) {
-    return this.compareStrength(other) > 0 && this.size() == other.size();
+    if (this.size() == 1 && other.size() == 1) {
+      return this.getCard(0).compareTo(other.getCard(0)) > 0;
+    }
+    return (other.size() == 0 || this.compareStrength(other) > 0 && this.size() == other.size());
   }
 }
