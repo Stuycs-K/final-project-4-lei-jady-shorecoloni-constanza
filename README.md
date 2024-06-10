@@ -23,9 +23,9 @@ Plays have to be stronger than the previous play
 This can be obtained by playing stronger sets or with stronger values or even stronger suits, with spades being the strongest followed by hearts, clovers, and diamonds.
 Cycle through turns and play cards at your turn.
 
-##Major Bugs
+## Major Bugs
 Occasionally the cards are not removed properly and can be placed twice.
 Very occasionally, there is an index out of bounds for the player. A majority of the games do not encounter this error.
 
-##Video Presentation
+## Video Presentation
 https://drive.google.com/file/d/1C5WfFh1L-ydR0PuW_tMv0ImeX9loLciK/view?usp=drive_link
