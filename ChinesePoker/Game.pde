@@ -53,12 +53,12 @@ public class Game{
       }
       // right
       if(display){
-        for(int i = 0; i < getPlayer(3).getDeck().size(); i++){
+        for(int i = getPlayer(3).getDeck().size() - 1; i >= 0; i--){
           image(getPlayer(3).getDeck().getCard(i).getImage(), width - 220, height - 250 - (i*30), 100, 140*(337/240));
         }
       }
       else{
-        for(int i = 0; i < getPlayer(3).getDeck().size(); i++){
+        for(int i = getPlayer(3).getDeck().size() - 1; i >= 0; i--){
           image(back.getImage(), width - 220, height - 250 - (i*30), 100, 140*(337/240));
         }
       }
@@ -69,12 +69,12 @@ public class Game{
       }
       //left
       if(display){
-        for(int i = 0; i < getPlayer(1).getDeck().size(); i++){
+        for(int i = getPlayer(1).getDeck().size() - 1; i >= 0; i--){
           image(getPlayer(1).getDeck().getCard(i).getImage(), 120, height - 250 - (i*30), 100, 140*(337/240));
         }
       }
       else{  
-        for(int i = 0; i < getPlayer(1).getDeck().size(); i++){
+        for(int i = getPlayer(1).getDeck().size() - 1; i >= 0; i--){
           image(back.getImage(), 120, height - 250 - (i*30), 100, 140*(337/240));
         }
       }
