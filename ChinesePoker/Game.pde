@@ -224,7 +224,7 @@ public class Game{
     }
    }
     if(sets.size() > 0){
-      Hand best = new Hand();//sets.get(0);
+      Hand best = new Hand();
       int max = 0;
       int min = -1;
       for(int i = 0; i < sets.size();i++){
@@ -245,8 +245,6 @@ public class Game{
       //   i++;
       // }
       if(!best.playable(prevSet)){
-      //  text("HIIIIII", width/2, 300);
-      //  delay(2000);
         pass();
         progressGame();
         return false;  

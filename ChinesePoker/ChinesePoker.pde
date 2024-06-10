@@ -49,12 +49,12 @@ void keyPressed(){
           if(game.getPlayer(0).play(game.prevSet)){
             game.progressGame();
           } else {
-            text("Invalid set", width/2, 600);
             if(game.getPlayer(0).getSelectedHand().size() == 0){
               game.pass();
               game.progressGame();
             }else{
               text("Invalid set", width/2, 600);
+              delay(600);
             }
           } 
         }else{
