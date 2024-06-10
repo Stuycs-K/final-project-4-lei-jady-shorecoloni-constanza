@@ -50,13 +50,6 @@ public class Card implements Comparable<Card>{
       } else if (suit.equals("spade")) {
         thisStrength *= 4;
       }
-      if (other.getSuit().equals("clover")) {
-        otherStrength *= 2;
-      } else if (other.getSuit().equals("heart")) {
-        otherStrength *= 3;
-      } else if (other.getSuit().equals("spade")) {
-        otherStrength *= 4;
-      }
     }
     return thisStrength - otherStrength;
   }
