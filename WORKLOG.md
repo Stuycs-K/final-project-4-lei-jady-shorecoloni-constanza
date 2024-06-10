@@ -16,7 +16,7 @@ Created Player and Game classes
 
 ### May 27, 2024
 
-continued working on Game class. Added helper method to create deck of cards for constructor, wrote shuffleDeck(), and tested them
+Continued working on Game class. Added helper method to create deck of cards for constructor, wrote shuffleDeck(), and tested them
 
 ### May 28, 2024
 
@@ -24,7 +24,7 @@ Hand function that returns deck strength, played around with display of card ima
 
 ### May 29, 2024
 
-work on/tried (but did not succeed) to make 'play' button and mouseClicked(), started working on setup and draw
+Work on/tried (but did not succeed) to make 'play' button and mouseClicked(), started working on setup and draw
 
 ### May 30, 2024
 
@@ -34,16 +34,23 @@ Actually when return/enter is pressed the selected hand is not removed, but the 
 
 ### May 31, 2024
 
-Changed all java files to pde, got image display to work (each card has PImage variable)
+Changed all java files to pde, got image display to work (each card has a PImage variable now).
 
 ### June 1 & 2, 2024
 
-added display method to game class to display everyone's hands, and cards on the table. Draw runs every 70 frames to make game visible
+Added display method to game class to display everyone's hands, and cards on the table. Draw runs every 70 frames to make game visible
 
-### June 3 (&4), 2024
+### June 3 (& 4), 2024
 
-worked on allowing players to pass and restarting round when everyone passes
+Found out why cards weren't displaying, worked on allowing players to pass and restarting round when everyone passes. Edited play methods with working isPossibleSets
 
+### June 5 (& 6), 2024
+
+Spent lots of time fixing merge conflicts, trying to find out why player's cards don't display when put down. Worked on getting passing to work smoothly
+
+### June 7 - 9, 2024
+
+Still trying to figure out why cards don't display (edit: fixed display!), made option for opponent's cards to be shown, edited how passing works.
 
 ## Jady Lei
 
