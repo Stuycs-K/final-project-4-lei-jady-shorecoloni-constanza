@@ -15,7 +15,7 @@ void draw(){
   }
   if(game.end()){
     background(0);
-    text("GAME OVER\n" + game.getPlayer(game.getActivePlayerIndex() - 1).getName() + " wins!!", width/2, height/2);
+    text("GAME OVER\n" + game.getPlayer(game.getActivePlayerIndex() - 1).getName() + " wins!!" + "\n Would you like to play again? (y/n)", width/2, height/2);
   }
 }
 
@@ -42,6 +42,15 @@ void mouseClicked(){
 
 void keyPressed(){
     if(game.end()){
+      if(key == 'y'){
+        size(1350, 750);
+        game = new Game();
+        game.start();
+        display = false;
+      }
+      if(key == 'n'){
+        exit();
+      }
     }
     else if(key == ENTER || key == RETURN){
       if(!game.isStarted()){

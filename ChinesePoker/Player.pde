@@ -32,7 +32,7 @@ public class Player {
     if (selectedHand.playable(prevSet) && selectedHand.isPossibleSet()) {
       game.prevSet = selectedHand;
       for (Card c : selectedHand.getHand()) {
-        System.out.println(c.getName());
+      //  System.out.println(c.getName());
         deck.removeCard(c);
       }
      // selectedHand.getHand().clear();

@@ -229,7 +229,6 @@ public class Game{
       sets.add(possibility);
     }
    }
-   println(""+sets);
     if(sets.size() > 0){
       Hand best = new Hand();
       int max = 0;
