@@ -6,11 +6,11 @@ public class Game{
   public Hand deck;
   public Hand prevSet;
   private int activePlayer;
-  //private int currentTurnNum;
-  private boolean passing;
-  private int pass;
   boolean started;
   Card back = new Card("back", 0, "");
+  public int pass;
+  public boolean passing;
+  ArrayList<Player> passed;
 
   public Game(){
     this.players = new ArrayList<Player>(4);
@@ -21,11 +21,14 @@ public class Game{
     started = false;
     passing = false;
     pass = 0;
+    passed = new ArrayList<Player>();
   }
   
-  public void displayCards(){
+  public void displayCards(boolean display){
     if(!started){
-      image((new Card("back", 0, "").getImage()), width/2-50, height/2-98, 100, 140*(337/240));
+      image((new Card("back", 0, "").getImage()), width/2 - 50, height/2 - 88, 100, 140*(337/240));
+      textSize(20);
+      text("Press ENTER/RETURN to start", width/2 - 115, height/2 - 118);
     }
     else{
       //play (bottom)
@@ -38,33 +41,81 @@ public class Game{
         }
       }
       textSize(20);
+      if(activePlayer != 0)
+        text(game.getActivePlayer().getName()+"'s turn",15,30);
+      else
+        text("Your turn", 15, 30);
+
       text(getPlayer(0).getName(), width/3 - 50 + (7*40), height - 170);
+      for(int i = 0; i < passed.size(); i++){
+        if(passed.get(i).equals(getPlayer(0)))
+          text("Pass", width/3 -50 + (13*40), height - 170);
+      }
       // right
-      for(int i = 0; i < getPlayer(3).getDeck().size(); i++){
-        image(back.getImage(), width - 220, height - 250 - (i*30), 100, 140*(337/240));
+      if(display){
+        for(int i = 0; i < getPlayer(3).getDeck().size(); i++){
+          image(getPlayer(3).getDeck().getCard(i).getImage(), width - 220, height - 250 - (i*30), 100, 140*(337/240));
+        }
+      }
+      else{
+        for(int i = 0; i < getPlayer(3).getDeck().size(); i++){
+          image(back.getImage(), width - 220, height - 250 - (i*30), 100, 140*(337/240));
+        }
       }
       text(getPlayer(3).getName(), width - 110, height - 250 - (3*30));
+      for(int i = 0; i < passed.size(); i++){
+        if(passed.get(i).equals(getPlayer(3)))
+          text("Pass", width - 110, height - 250 - (5*30));
+      }
       //left
-      for(int i = 0; i < getPlayer(1).getDeck().size(); i++){
-        image(back.getImage(), 120, height - 250 - (i*30), 100, 140*(337/240));
+      if(display){
+        for(int i = 0; i < getPlayer(1).getDeck().size(); i++){
+          image(getPlayer(1).getDeck().getCard(i).getImage(), 120, height - 250 - (i*30), 100, 140*(337/240));
+        }
+      }
+      else{  
+        for(int i = 0; i < getPlayer(1).getDeck().size(); i++){
+          image(back.getImage(), 120, height - 250 - (i*30), 100, 140*(337/240));
+        }
       }
       text(getPlayer(1).getName(), 10, height - 250 - (3*30));
+      for(int i = 0; i < passed.size(); i++){
+        if(passed.get(i).equals(getPlayer(1)))
+          text("Pass", 10, height - 250 - (5*30));
+      }
       //top
-      for(int i = 0; i < getPlayer(2).getDeck().size(); i++){
-        image(back.getImage(), width/3 - 50 + (i*40), 50, 100, 140*(337/240));
+      if(display){
+        for(int i = 0; i < getPlayer(2).getDeck().size(); i++){
+          image(getPlayer(2).getDeck().getCard(i).getImage(), width/3 - 50 + (i*40), 50, 100, 140*(337/240));
+        }
+      }
+      else{
+        for(int i = 0; i < getPlayer(2).getDeck().size(); i++){
+          image(back.getImage(), width/3 - 50 + (i*40), 50, 100, 140*(337/240));
+        }
       }
       text(getPlayer(2).getName(), width/3 - 50 + (6*40), 30);
-      
+      for(int i = 0; i < passed.size(); i++){
+        if(passed.get(i).equals(getPlayer(2)))
+          text("Pass", width/3 -50 + (13*40), 30);
+      }      
       //cards on table
       for(int i = 0; i < prevSet.size(); i++){
-  //      image(prevSet.getCard(i).getImage(), width/3 - 5 + (i*100), height/2, 100, 140*(337/240));
+   //     image(prevSet.getCard(i).getImage(), width/3 - 5 + (i*100), height/2, 100, 140*(337/240));
         image(prevSet.getCard(i).getImage(), width / 2 - (i * 20), height / 2, 100, 140*(337/240));
       }
     }
+
+    if(passing == false){
+          delay(400);
+      passed = new ArrayList<Player>();
+    }
   }
+  
   public Hand getPrevSet(){
     return prevSet;
   }
+
   public Player getPlayer(int index){
     return players.get(index);
   }
@@ -141,7 +192,7 @@ public class Game{
   public void progressGame() {
       activePlayer ++;
       activePlayer %= 4;
-    }
+  }
   
   public Player getActivePlayer() {
     return players.get(activePlayer);
@@ -149,47 +200,8 @@ public class Game{
   public int getActivePlayerIndex() {
     return activePlayer;
   }
-
-  public void deal(){
-    ArrayList<Card> cards = new ArrayList<Card>(13);
-    for(int i = 0; i < 13; i++){
-      cards.add(deck.getCard(i));
-    }
-    cards.sort(null);
-    players.add(new Player("You", new Hand(cards)));
-    
-    cards = new ArrayList<Card>(13);
-    for(int i = 13; i< 26; i++){
-      cards.add(deck.getCard(i));
-    }
-    cards.sort(null);
-    players.add(new Player("Opponent 1", new Hand(cards)));
-    
-    cards = new ArrayList<Card>(13);
-    for(int i = 26; i< 39; i++){
-      cards.add(deck.getCard(i));
-    }
-    cards.sort(null);
-    players.add(new Player("Opponent 2", new Hand(cards)));
-    
-    cards = new ArrayList<Card>(13);
-      for(int i = 39; i< 52; i++){
-        cards.add(deck.getCard(i));
-      }
-    cards.sort(null);
-    players.add(new Player("Opponent 3", new Hand(cards)));
-  }
-
-  public boolean end(){
-    for(int i = 0; i < 4; i++){
-      if(players.get(i).getDeck().size() == 0){
-        return true;
-      }
-    }
-    return false;
-  }
   
-    public void setCurrHand(Hand hand){
+  public void setCurrHand(Hand hand){
     prevSet = hand;
   }
   public boolean play(Player player){
@@ -229,7 +241,6 @@ public class Game{
         player.getDeck().removeCard(c);
       }
       passing = false;
-      pass = 0;
       progressGame();
     return true;
     }
@@ -238,17 +249,63 @@ public class Game{
     return false;
   }
   
+  public void deal(){
+    ArrayList<Card> cards = new ArrayList<Card>(13);
+    for(int i = 0; i < 13; i++){
+      cards.add(deck.getCard(i));
+    }
+    cards.sort(null);
+    players.add(new Player("You", new Hand(cards)));
+    
+    cards = new ArrayList<Card>(13);
+    for(int i = 13; i< 26; i++){
+      cards.add(deck.getCard(i));
+    }
+    cards.sort(null);
+    players.add(new Player("Opponent 1", new Hand(cards)));
+    
+    cards = new ArrayList<Card>(13);
+    for(int i = 26; i< 39; i++){
+      cards.add(deck.getCard(i));
+    }
+    cards.sort(null);
+    players.add(new Player("Opponent 2", new Hand(cards)));
+    
+    cards = new ArrayList<Card>(13);
+      for(int i = 39; i< 52; i++){
+        cards.add(deck.getCard(i));
+      }
+    cards.sort(null);
+    players.add(new Player("Opponent 3", new Hand(cards)));
+  }
+
+  public boolean end(){
+    for(int i = 0; i < 4; i++){
+      if(players.get(i).getDeck().size() == 0){
+        return true;
+      }
+    }
+    return false;
+  }
+  
+  
   public void pass(){
-    if(passing)
+    if(passing){
       pass++;
+      passed.add(getActivePlayer());
+    }
     else{
       pass = 1;
       passing = true;
+      passed.add(getActivePlayer());
+
     }
     if(pass == 3){
-      prevSet = new Hand();
+      passed.add(getActivePlayer());
       pass = 0;
       passing = false;
+      prevSet = new Hand();
+ //     passed = new ArrayList<Player>();
     }
   }
 }

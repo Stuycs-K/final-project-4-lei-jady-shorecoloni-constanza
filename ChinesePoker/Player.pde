@@ -27,17 +27,17 @@ public class Player {
     selectedHand = h;
   }
 
-    public boolean play(int prevSize) {
-      if (selectedHand.isPossibleSet() && (selectedHand.size() == prevSize || prevSize == 0) ) {
 
-        for (Card c : selectedHand.getHand()) {
+  public boolean play(int prevSize) {
+    if (selectedHand.isPossibleSet() && (selectedHand.size() == prevSize || prevSize == 0) /*&& selectedHand.deckStrength() > prevSet.deckStrength()*/) {
+      game.prevSet = selectedHand;
+      for (Card c : selectedHand.getHand()) {
         System.out.println(c.getName());
         deck.removeCard(c);
       }
-      selectedHand.getHand().clear();
-
+     // selectedHand.getHand().clear();
+      selectedHand = new Hand();
       game.passing = false;
-
       return true;
     }
     return false;
@@ -56,4 +56,36 @@ public class Player {
     card.changeSelect();
   }
 
+ /* public boolean ask(){
+    ArrayList<Hand> sets = new ArrayList<Hand>();
+    if(game.prevSet.size() > 0){
+      sets = (getDeck()).possibleSets(game.prevSet.size());
+     }else{
+       ArrayList<Hand> possible = (getDeck()).possibleSets(1);
+       for(Hand possibility: possible){
+         sets.add(possibility);
+       }
+       possible = (getDeck()).possibleSets(2);
+       for(Hand possibility: possible){
+         sets.add(possibility);
+       }
+       possible = (getDeck()).possibleSets(5);
+       for(Hand possibility: possible){
+         sets.add(possibility);
+       }
+     }
+     if(sets.size() == 0)
+       return true;
+    rect(width/2, height/2, 30, 40);
+    text("sure?", width/2, height/2);
+    delay(1000);
+    return true;
+  }*/
+ /* 
+  void keyPressed(){
+    if(key == 'y'){
+      
+    }
+  }
+  */
 }
