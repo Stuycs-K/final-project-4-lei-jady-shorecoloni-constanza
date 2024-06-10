@@ -231,7 +231,7 @@ public class Game{
       //   }
       // }
       int i = 0;
-      while (i < sets.size() && best.deckStrength() <= prevSet.deckStrength()) {
+      while (i < sets.size() && best.deckStrength() > 0) {
         if (sets.get(i).deckStrength() > prevSet.deckStrength()) {
           best = sets.get(i);
         }
@@ -249,7 +249,7 @@ public class Game{
       }
       passing = false;
       progressGame();
-    return true;
+      return true;
     }
     pass();
     progressGame();

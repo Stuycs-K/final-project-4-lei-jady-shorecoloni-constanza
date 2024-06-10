@@ -205,6 +205,6 @@ public class Hand {
   }
 //diamond clover heart spades
   public boolean playable(Hand other) {
-    return this.compareStrength(other) > 0 && this.size() == other.size();
+    return (other.size() == 0 || this.compareStrength(other) > 0 && this.size() == other.size());
   }
 }
