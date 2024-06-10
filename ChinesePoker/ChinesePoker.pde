@@ -23,12 +23,20 @@ void draw(){
 void mouseClicked(){
   int test = ((int)mouseX + 40 - (width/3)) / 40;
   if(mouseY < (height - 210 + 140*337/240) && test >= 0 && test < 13){
-    Card card = game.getPlayer(0).getDeck().getCard(test);
-    if(card.isSelected()){
-      game.getPlayer(0).unselect(card);
+    // if (game.getPlayer(0).getDeck().size() == 1) {
+    //   test = 0;
+    // }
+    if (test == game.getPlayer(0).getDeck().size()) {
+      test = test - 1;
     }
-    else{
-      game.getPlayer(0).select(card);
+    if (test < game.getPlayer(0).getDeck().size()) {
+      Card card = game.getPlayer(0).getDeck().getCard(test);
+      if(card.isSelected()){
+        game.getPlayer(0).unselect(card);
+      }
+      else{
+        game.getPlayer(0).select(card);
+      }
     }
   //  card.changeSelect();
   }
