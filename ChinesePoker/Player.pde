@@ -29,7 +29,7 @@ public class Player {
 
 
   public boolean play(Hand prevSet) {
-    if (selectedHand.playable(prevSet)) {
+    if (selectedHand.playable(prevSet) && selectedHand.isPossibleSet()) {
       game.prevSet = selectedHand;
       for (Card c : selectedHand.getHand()) {
         System.out.println(c.getName());
