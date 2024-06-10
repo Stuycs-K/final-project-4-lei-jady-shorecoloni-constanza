@@ -215,19 +215,27 @@ public class Game{
    if(prevSet.size() > 0){
      sets = (player.getDeck()).possibleSets(prevSet.size());
    } else{
-    ArrayList<Hand> possible = (player.getDeck()).possibleSets(1);
-    for(Hand possibility: possible){
-      sets.add(possibility);
+    int num = (int)(Math.random() * 3);
+    if (num == 0) {
+      sets = (player.getDeck().possibleSets(1));
+    } else if (num == 1) {
+      sets = (player.getDeck().possibleSets(2));
+    } else {
+      sets = (player.getDeck().possibleSets(5));
     }
+    // ArrayList<Hand> possible = (player.getDeck()).possibleSets(1);
+    // for(Hand possibility: possible){
+    //   sets.add(possibility);
+    // }
 
-    possible = (player.getDeck()).possibleSets(2);
-    for(Hand possibility: possible){
-      sets.add(possibility);
-    }
-    possible = (player.getDeck()).possibleSets(5);
-    for(Hand possibility: possible){
-      sets.add(possibility);
-    }
+    // possible = (player.getDeck()).possibleSets(2);
+    // for(Hand possibility: possible){
+    //   sets.add(possibility);
+    // }
+    // possible = (player.getDeck()).possibleSets(5);
+    // for(Hand possibility: possible){
+    //   sets.add(possibility);
+    // }
    }
     if(sets.size() > 0){
       Hand best = new Hand();
