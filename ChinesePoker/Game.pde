@@ -225,18 +225,25 @@ public class Game{
    }
     if(sets.size() > 0){
       Hand best = new Hand();//sets.get(0);
-      // for(int i = 0; i < sets.size();i++){
-      //   if(sets.get(i).deckStrength() > best.deckStrength() && sets.get(i).deckStrength() > prevSet.deckStrength() && (sets.get(i).size() == prevSet.size() || prevSet.size() == 0)){
+      int max = 0;
+      int min = -1;
+      for(int i = 0; i < sets.size();i++){
+        if(sets.get(i).deckStrength() > best.deckStrength() && sets.get(i).deckStrength() > prevSet.deckStrength() && (sets.get(i).size() == prevSet.size() || prevSet.size() == 0)){
+          best = sets.get(i);
+          max = i;
+          if (min == -1) {
+            min = i;
+          }
+        }
+      }
+      best = sets.get((max + min) / 2);
+      // int i = 0;
+      // while (i < sets.size() && best.deckStrength() > 0) {
+      //   if (sets.get(i).deckStrength() > prevSet.deckStrength()) {
       //     best = sets.get(i);
       //   }
+      //   i++;
       // }
-      int i = 0;
-      while (i < sets.size() && best.deckStrength() > 0) {
-        if (sets.get(i).deckStrength() > prevSet.deckStrength()) {
-          best = sets.get(i);
-        }
-        i++;
-      }
       if(!best.playable(prevSet)){
         pass();
         progressGame();
