@@ -27,6 +27,8 @@ public class Game{
   public void displayCards(boolean display){
     if(!started){
       image((new Card("back", 0, "").getImage()), width/2 - 50, height/2 - 88, 100, 140*(337/240));
+      textSize(20);
+      text("Press ENTER/RETURN to start", width/2 - 115, height/2 - 118);
     }
     else{
       //play (bottom)
@@ -40,14 +42,14 @@ public class Game{
       }
       textSize(20);
       if(activePlayer != 0)
-        text(game.getActivePlayer().getName()+"'s turn",10,20);
+        text(game.getActivePlayer().getName()+"'s turn",15,30);
       else
-        text("Your turn", 10, 20);
+        text("Your turn", 15, 30);
 
       text(getPlayer(0).getName(), width/3 - 50 + (7*40), height - 170);
       for(int i = 0; i < passed.size(); i++){
         if(passed.get(i).equals(getPlayer(0)))
-          text("Passed", width/3 -50 + (13*40), height - 170);
+          text("Pass", width/3 -50 + (13*40), height - 170);
       }
       // right
       if(display){
@@ -63,7 +65,7 @@ public class Game{
       text(getPlayer(3).getName(), width - 110, height - 250 - (3*30));
       for(int i = 0; i < passed.size(); i++){
         if(passed.get(i).equals(getPlayer(3)))
-          text("Passed", width - 110, height - 250 - (5*30));
+          text("Pass", width - 110, height - 250 - (5*30));
       }
       //left
       if(display){
@@ -79,7 +81,7 @@ public class Game{
       text(getPlayer(1).getName(), 10, height - 250 - (3*30));
       for(int i = 0; i < passed.size(); i++){
         if(passed.get(i).equals(getPlayer(1)))
-          text("Passed", 10, height - 250 - (5*30));
+          text("Pass", 10, height - 250 - (5*30));
       }
       //top
       if(display){
@@ -95,7 +97,7 @@ public class Game{
       text(getPlayer(2).getName(), width/3 - 50 + (6*40), 30);
       for(int i = 0; i < passed.size(); i++){
         if(passed.get(i).equals(getPlayer(2)))
-          text("Passed", width/3 -50 + (13*40), 30);
+          text("Pass", width/3 -50 + (13*40), 30);
       }      
       //cards on table
       for(int i = 0; i < prevSet.size(); i++){
@@ -103,8 +105,11 @@ public class Game{
         image(prevSet.getCard(i).getImage(), width / 2 - (i * 20), height / 2, 100, 140*(337/240));
       }
     }
-    if(passing == false)
+
+    if(passing == false){
+          delay(400);
       passed = new ArrayList<Player>();
+    }
   }
   
   public Hand getPrevSet(){

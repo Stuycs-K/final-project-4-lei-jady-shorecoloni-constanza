@@ -12,8 +12,6 @@ void setup(){
 void draw(){
   if(!game.end()){  
     background(0);
-  //  textSize(20);
-
     game.displayCards(display);    
   }
   if(game.end()){
@@ -43,14 +41,12 @@ void keyPressed(){
       } else {
         if(game.getActivePlayer().equals(game.getPlayer(0))){
           Hand sel = game.getPlayer(0).getSelectedHand();
-          if(sel.size() == 0){
+          if(sel.size() == 0 /*&& game.getPlayer(0).ask()*/){
             game.pass();
             game.progressGame();
           }
-          else if(game.getPlayer(0).play(game.getPrevSet().size())){
-            game.setCurrHand(sel);
+          else if(game.getPlayer(0).play(game.getPrevSet().size(), game.getPrevSet())){
             game.progressGame();
-        //  println(game.getPrevSet());
           }
         }else{
          game.play(game.getActivePlayer());
