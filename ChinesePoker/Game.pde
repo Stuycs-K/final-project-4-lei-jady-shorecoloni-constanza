@@ -245,6 +245,8 @@ public class Game{
       //   i++;
       // }
       if(!best.playable(prevSet)){
+        text("HIIIIII", width/2, 300);
+        delay(2000);
         pass();
         progressGame();
         return false;  

@@ -47,12 +47,16 @@ void keyPressed(){
         game.started();
       } else {
         if(game.getActivePlayer().equals(game.getPlayer(0))){
-          Hand sel = game.getPlayer(0).getSelectedHand();
           if(game.getPlayer(0).play(game.prevSet)){
             game.progressGame();
           } else {
-            game.pass();
-            game.progressGame();
+            text("Invalid set", width/2, 600);
+            if(game.getPlayer(0).getSelectedHand().size() == 0){
+              game.pass();
+              game.progressGame();
+            }else{
+              text("Invalid set", width/2, 600);
+            }
           } 
         }else{
          game.play(game.getActivePlayer());
