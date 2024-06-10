@@ -208,33 +208,40 @@ public class Game{
     ArrayList<Hand> sets = new ArrayList<Hand>();
    if(prevSet.size() > 0){
      sets = (player.getDeck()).possibleSets(prevSet.size());
-   }else{
-   ArrayList<Hand> possible = (player.getDeck()).possibleSets(1);
-   for(Hand possibility: possible){
-     sets.add(possibility);
-   }
+   } else{
+    ArrayList<Hand> possible = (player.getDeck()).possibleSets(1);
+    for(Hand possibility: possible){
+      sets.add(possibility);
+    }
 
-   possible = (player.getDeck()).possibleSets(2);
-   for(Hand possibility: possible){
-     sets.add(possibility);
-   }
-   possible = (player.getDeck()).possibleSets(5);
-   for(Hand possibility: possible){
-     sets.add(possibility);
-   }
+    possible = (player.getDeck()).possibleSets(2);
+    for(Hand possibility: possible){
+      sets.add(possibility);
+    }
+    possible = (player.getDeck()).possibleSets(5);
+    for(Hand possibility: possible){
+      sets.add(possibility);
+    }
    }
     if(sets.size() > 0){
       Hand best = new Hand();//sets.get(0);
-      for(int i = 0; i < sets.size();i++){
-        if(sets.get(i).deckStrength() > best.deckStrength() && sets.get(i).deckStrength() > prevSet.deckStrength() && (sets.get(i).size() == prevSet.size() || prevSet.size() == 0)){
+      // for(int i = 0; i < sets.size();i++){
+      //   if(sets.get(i).deckStrength() > best.deckStrength() && sets.get(i).deckStrength() > prevSet.deckStrength() && (sets.get(i).size() == prevSet.size() || prevSet.size() == 0)){
+      //     best = sets.get(i);
+      //   }
+      // }
+      int i = 0;
+      while (i < sets.size() && best.deckStrength() <= prevSet.deckStrength()) {
+        if (sets.get(i).deckStrength() > prevSet.deckStrength()) {
           best = sets.get(i);
         }
+        i++;
       }
-      if(best.size() == 0){
+      if(!best.playable(prevSet)){
         pass();
         progressGame();
         return false;  
-    }
+      }
       prevSet = best;
       for (Card c : best.getHand()) {
        // System.out.println(c.getName());
