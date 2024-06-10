@@ -105,3 +105,12 @@ Worked on Oponent actions
 Fixed some stuff in another branch and finally got possibleSets to work.
 ### June 5, 2024
 Fixed compareStrength and wrote boolean playable() 
+### June 6, 2024
+- Merged GameLoop to Main or something similar enough.
+### June 7, 2024
+- Final plans for the weekend discussed in class. Dealt with some merge conflicts and identified the biggest bugs.
+### June 9, 2024
+- Created FinalChanges branch to work on final touches
+- Fixed deck strength issues and added minor graphical changes to make the displayed cards read better.
+### June 10, 2024
+- Wrote presentation script and instructions. Polished the game as best we could.
