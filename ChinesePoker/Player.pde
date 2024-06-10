@@ -28,8 +28,8 @@ public class Player {
   }
 
 
-  public boolean play(int prevSize) {
-    if (selectedHand.isPossibleSet() && (selectedHand.size() == prevSize || prevSize == 0) /*&& selectedHand.deckStrength() > prevSet.deckStrength()*/) {
+  public boolean play(Hand prevSet) {
+    if (selectedHand.playable(prevSet)) {
       game.prevSet = selectedHand;
       for (Card c : selectedHand.getHand()) {
         System.out.println(c.getName());

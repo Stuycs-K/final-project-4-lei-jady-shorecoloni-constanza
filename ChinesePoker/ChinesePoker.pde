@@ -48,13 +48,12 @@ void keyPressed(){
       } else {
         if(game.getActivePlayer().equals(game.getPlayer(0))){
           Hand sel = game.getPlayer(0).getSelectedHand();
-          if(sel.size() == 0 /*&& game.getPlayer(0).ask()*/){
+          if(game.getPlayer(0).play(game.prevSet)){
+            game.progressGame();
+          } else {
             game.pass();
             game.progressGame();
-          }
-          else if(game.getPlayer(0).play(game.getPrevSet().size())){
-            game.progressGame();
-          }
+          } 
         }else{
          game.play(game.getActivePlayer());
         }
