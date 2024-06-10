@@ -205,6 +205,12 @@ public class Game{
     prevSet = hand;
   }
   public boolean play(Player player){
+    if(player.getDeck().size() == 1){
+      prevSet = player.getDeck();
+      player.getDeck().removeCard(0);
+      progressGame();
+      return true;
+    }
     ArrayList<Hand> sets = new ArrayList<Hand>();
    if(prevSet.size() > 0){
      sets = (player.getDeck()).possibleSets(prevSet.size());
@@ -223,6 +229,7 @@ public class Game{
       sets.add(possibility);
     }
    }
+   println(""+sets);
     if(sets.size() > 0){
       Hand best = new Hand();
       int max = 0;
@@ -236,7 +243,11 @@ public class Game{
           }
         }
       }
-      best = sets.get((max + min) / 2);
+      if(prevSet.size() == 0){
+        best = sets.get(0);
+      }
+      else
+        best = sets.get((max + min) / 2);
       // int i = 0;
       // while (i < sets.size() && best.deckStrength() > 0) {
       //   if (sets.get(i).deckStrength() > prevSet.deckStrength()) {

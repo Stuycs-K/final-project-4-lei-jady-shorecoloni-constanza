@@ -41,7 +41,9 @@ void mouseClicked(){
 }
 
 void keyPressed(){
-    if(key == ENTER || key == RETURN){
+    if(game.end()){
+    }
+    else if(key == ENTER || key == RETURN){
       if(!game.isStarted()){
         game.started();
       } else {
@@ -54,7 +56,7 @@ void keyPressed(){
               game.progressGame();
             }else{
               text("Invalid set", width/2, 600);
-              delay(600);
+              delay(1000);
             }
           } 
         }else{
@@ -62,7 +64,7 @@ void keyPressed(){
         }
       }
     }
-    if(key == 'd'){
+    else if(key == 'd'){
       display = !display;
     }
 }
